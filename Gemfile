@@ -16,6 +16,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'haml'
 
 gem 'unicorn'
+gem 'rack-timeout'
 
 group :development, :test do
   gem 'byebug'

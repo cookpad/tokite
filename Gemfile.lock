@@ -85,6 +85,7 @@ GEM
     rack (2.0.3)
     rack-test (0.6.3)
       rack (>= 1.0)
+    rack-timeout (0.4.2)
     rails (5.1.1)
       actioncable (= 5.1.1)
       actionmailer (= 5.1.1)
@@ -156,6 +157,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   pg (~> 0.18)
   pry-byebug
+  rack-timeout
   rails (~> 5.1.1)
   sass-rails (~> 5.0)
   spring
