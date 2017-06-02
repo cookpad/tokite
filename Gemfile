@@ -15,6 +15,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jbuilder', '~> 2.5'
 gem 'haml'
 
+gem 'unicorn'
+
 group :development, :test do
   gem 'byebug'
   gem 'pry-byebug'
