@@ -17,6 +17,6 @@ class HooksController < ActionController::Base
   end
 
   def hook_params
-    params.permit(:action, :number, :repository, :sender, :issue_comment)
+    params.permit(:action, :number, :repository, :sender, comment: {}, pull_request: {}, issue: {})
   end
 end
