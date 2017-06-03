@@ -44,6 +44,7 @@ GEM
     coderay (1.1.1)
     concurrent-ruby (1.0.5)
     diff-lcs (1.3)
+    diffy (3.2.0)
     erubi (1.6.0)
     execjs (2.7.0)
     ffi (1.9.18)
@@ -115,6 +116,9 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
+    ridgepole (0.6.5)
+      activerecord (>= 4.2, < 6)
+      diffy
     rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -177,6 +181,7 @@ DEPENDENCIES
   pry-byebug
   rack-timeout
   rails (~> 5.1.1)
+  ridgepole
   rspec-rails
   sass-rails (~> 5.0)
   spring
