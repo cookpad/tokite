@@ -8,4 +8,7 @@
     = javascript_include_tag 'application'
 
   %body
+    .global_header
+      = link_to_unless_current "Top", root_path
+      = link_to_unless_current "Users", users_path
     = yield
