@@ -17,6 +17,8 @@ gem 'haml'
 
 gem 'unicorn'
 gem 'rack-timeout'
+gem 'omniauth-google-oauth2'
+gem 'denv'
 
 group :development, :test do
   gem 'byebug'
