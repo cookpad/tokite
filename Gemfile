@@ -21,6 +21,7 @@ gem 'rack-timeout'
 group :development, :test do
   gem 'byebug'
   gem 'pry-byebug'
+  gem 'rspec-rails'
 end
 
 group :development do
