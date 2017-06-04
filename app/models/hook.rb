@@ -18,13 +18,11 @@ class Hook
 
   def fire!
     Rule.matched_rules(*event.target_texts).each do |rule|
-      notify!(rule.slack_channels)
+      notify!(rule.channel)
     end
   end
 
-  def notify!(channels)
-    channels.each do |channel|
-      # TODO: Notify slack channels
-    end
+  def notify!(channel)
+    # TODO: Notify slack channels
   end
 end

@@ -3,6 +3,6 @@ FactoryGirl.define do
     user
     sequence(:name) {|n| "name_#{n}" }
     pattern "pattern"
-    channels "test-hogelog,general tech"
+    channel "general"
   end
 end

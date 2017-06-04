@@ -8,10 +8,6 @@ class Rule < ApplicationRecord
     end
   end
 
-  def slack_channels
-    channels.split(/[\s,]/)
-  end
-
   def notify!
   end
 end
