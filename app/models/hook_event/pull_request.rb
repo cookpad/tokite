@@ -1,16 +1,10 @@
 module HookEvent
-  class PullRequest
-    attr_reader :pull_request
-
-    def initialize(hook_params)
-      @pull_request = hook_params[:pull_request]
-    end
-
+  class PullRequest < BaseEvent
     def target_texts
       [
-        pull_request[:title],
-        pull_request[:body],
-        pull_request[:user][:login],
+        hook_params[:pull_request][:title],
+        hook_params[:pull_request][:body],
+        hook_params[:pull_request][:user][:login],
       ]
     end
   end

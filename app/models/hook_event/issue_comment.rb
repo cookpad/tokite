@@ -1,15 +1,9 @@
 module HookEvent
-  class IssueComment
-    attr_reader :comment
-
-    def initialize(hook_params)
-      @comment = hook_params[:comment]
-    end
-
+  class IssueComment < BaseEvent
     def target_texts
       [
-        comment[:body],
-        comment[:user][:login],
+        hook_params[:comment][:body],
+        hook_params[:comment][:user][:login],
       ]
     end
   end

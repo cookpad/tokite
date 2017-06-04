@@ -1,16 +1,10 @@
 module HookEvent
-  class Issues
-    attr_reader :issue
-
-    def initialize(hook_params)
-      @issue = hook_params[:issue]
-    end
-
+  class Issues < BaseEvent
     def target_texts
       [
-        comment[:title],
-        comment[:body],
-        comment[:user][:login],
+        hook_params[:issue][:title],
+        hook_params[:issue][:body],
+        hook_params[:issue][:user][:login],
       ]
     end
   end

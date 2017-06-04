@@ -7,7 +7,4 @@ class Rule < ApplicationRecord
       texts.any?{|text| text.match(rule.pattern) }
     end
   end
-
-  def notify!
-  end
 end
