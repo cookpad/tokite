@@ -1,24 +1,24 @@
-# README
+# Tokite
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Tokite send GitHub event (pull-request, issue and comment) to Slack.
+ 
+Notification setting are personalized and customizable by query.
 
-Things you may want to cover:
+## Development
+```console
+$ ./bin/setup
+$ vim .env
+...
+$ ./bin/rails s
+```
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Configuration
+<table>
+<tr><th>GOOGLE_CLIENT_ID</th><td>Google+ OAuth2 client ID</td></tr>
+<tr><th>GOOGLE_CLIENT_SECRET</th><td>Google+ OAuth2 client secret</td></tr>
+<tr><th>GOOGLE_HOSTED_DOMAIN (optional)</th><td>Limited by G Suite domain</td></tr>
+<tr><th>SECRET_KEY_BASE</th><td><code>rails secret</code> key</td></tr>
+<tr><th>SLACK_WEBHOOK_URL</th><td>Slack incoming webhook url</td></tr>
+<tr><th>SLACK_NAME (optional)</th><td>Slack notification user name</td></tr>
+<tr><th>SLACK_ICON_EMOJI (optional)</th><td>Slack notification icon</td></tr>
+</table>
