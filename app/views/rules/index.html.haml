@@ -1,0 +1,8 @@
+- @users.each do |user|
+  %h2= user.name
+  %ul
+  - user.rules.order(:id).each do |rule|
+    %li= link_to rule.name, edit_user_rule_path(user, rule)
+  %p
+    = link_to "New Rule", new_user_rule_path(user)
+

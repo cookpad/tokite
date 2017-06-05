@@ -8,7 +8,11 @@
     = javascript_include_tag 'application'
 
   %body
-    .global_header
-      = link_to_unless_current "Top", root_path
-      = link_to_unless_current "Users", users_path
+    - if current_user
+      .global_header
+        = link_to_unless_current "Top", root_path
+        = link_to_unless_current "Users", users_path
+        = link_to_unless_current "My Rules", user_rules_path(current_user)
+        = link_to_unless_current "All Rules", rules_path
+
     = yield

@@ -3,8 +3,9 @@ Rails.application.routes.draw do
 
   resources :hooks, only: %w(create)
   resources :users, only: %w(index) do
-    resources :rules, only: %w(index)
+    resources :rules, only: %w(index new create edit update destroy)
   end
+  resources :rules, only: %w(index)
 
   get "sign_in", to: "sessions#new", as: "sign_in"
   get "auth/google_oauth2/callback", to: "sessions#create"
