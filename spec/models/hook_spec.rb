@@ -4,7 +4,7 @@ RSpec.describe Hook, type: :model do
   describe "fire!" do
     xcontext "for debug" do
       before do
-        FactoryGirl.create(:rule, pattern: ".", channel: "#test-private")
+        FactoryGirl.create(:rule, query: ".", channel: "#test-private")
       end
       let(:params) {
         JSON.parse(payload_json("#{event}.json")).with_indifferent_access

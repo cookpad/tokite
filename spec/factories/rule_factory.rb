@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :rule do
     user
     sequence(:name) {|n| "name_#{n}" }
-    pattern "pattern"
+    query "query"
     channel "#general"
   end
 end

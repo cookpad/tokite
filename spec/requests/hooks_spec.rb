@@ -9,7 +9,7 @@ RSpec.describe "Hook", type: :request do
     let(:params) {
       JSON.parse(payload_json("#{event}.json"))
     }
-    let!(:rule) { FactoryGirl.create(:rule, pattern: ".") }
+    let!(:rule) { FactoryGirl.create(:rule, query: ".") }
 
     context "with pull_request" do
       let(:event) { "pull_request" }

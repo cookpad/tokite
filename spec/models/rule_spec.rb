@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe Rule, type: :model do
   describe ".matched_rules" do
     before do
-      FactoryGirl.create(:rule, pattern: "foo")
-      FactoryGirl.create(:rule, pattern: "(?:foo|bar)")
-      FactoryGirl.create(:rule, pattern: "bar")
+      FactoryGirl.create(:rule, query: "foo")
+      FactoryGirl.create(:rule, query: "(?:foo|bar)")
+      FactoryGirl.create(:rule, query: "bar")
     end
 
     it "returns only matched rules" do
