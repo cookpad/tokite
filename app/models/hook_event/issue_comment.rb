@@ -8,7 +8,7 @@ module HookEvent
     end
 
     def notify?
-      true
+      %w(created).include?(hook_params[:action])
     end
 
     def slack_text
