@@ -20,10 +20,12 @@ gem 'unicorn'
 gem 'rack-timeout'
 gem 'omniauth-google-oauth2'
 gem 'denv'
+gem 'slack-notifier'
 
 group :development, :test do
   gem 'byebug'
   gem 'pry-byebug'
+  gem 'pry-rails'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
 end

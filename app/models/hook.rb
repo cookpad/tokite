@@ -17,12 +17,14 @@ class Hook
   end
 
   def fire!
+    return unless event.notify?
     Rule.matched_rules(*event.target_texts).each do |rule|
-      notify!(rule.channel)
+      payload = {
+        channel: rule.channel,
+        text: event.slack_text,
+        attachments: [event.slack_attachment, rule.slack_attachment],
+      }
+      NotifyGithubHookEventJob.perform_now(payload)
     end
-  end
-
-  def notify!(channel)
-    # TODO: Notify slack channels
   end
 end

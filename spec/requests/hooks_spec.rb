@@ -16,7 +16,7 @@ RSpec.describe "Hook", type: :request do
 
       it "fire hook" do
         expect_any_instance_of(Hook).to receive(:fire!).and_call_original
-        expect_any_instance_of(Hook).to receive(:notify!)
+        expect_any_instance_of(NotifyGithubHookEventJob).to receive(:perform)
         post hooks_path, params: params, headers: headers
       end
     end
@@ -26,7 +26,7 @@ RSpec.describe "Hook", type: :request do
 
       it "fire hook" do
         expect_any_instance_of(Hook).to receive(:fire!).and_call_original
-        expect_any_instance_of(Hook).to receive(:notify!)
+        expect_any_instance_of(NotifyGithubHookEventJob).to receive(:perform)
         post hooks_path, params: params, headers: headers
       end
     end
@@ -36,7 +36,7 @@ RSpec.describe "Hook", type: :request do
 
       it "fire hook" do
         expect_any_instance_of(Hook).to receive(:fire!).and_call_original
-        expect_any_instance_of(Hook).to receive(:notify!)
+        expect_any_instance_of(NotifyGithubHookEventJob).to receive(:perform)
         post hooks_path, params: params, headers: headers
       end
     end

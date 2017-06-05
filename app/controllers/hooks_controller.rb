@@ -6,7 +6,7 @@ class HooksController < ActionController::Base
   GITHUB_EVENT_HEADER = "X-GitHub-Event"
 
   def create
-    Hook.fire!(github_event, hook_params)
+    Hook.fire!(github_event, request.request_parameters)
     render plain: "ok"
   end
 
@@ -14,9 +14,5 @@ class HooksController < ActionController::Base
 
   def github_event
     request.headers[GITHUB_EVENT_HEADER]
-  end
-
-  def hook_params
-    params.permit(:action, :number, :repository, :sender, comment: {}, pull_request: {}, issue: {})
   end
 end

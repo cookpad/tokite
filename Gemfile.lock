@@ -125,6 +125,8 @@ GEM
     pry-byebug (3.4.2)
       byebug (~> 9.0)
       pry (~> 0.10)
+    pry-rails (0.3.6)
+      pry (>= 0.10.4)
     rack (2.0.3)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -188,6 +190,7 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
     sexp_processor (4.9.0)
+    slack-notifier (2.2.1)
     slop (3.6.0)
     spring (2.0.2)
       activesupport (>= 4.2)
@@ -227,11 +230,13 @@ DEPENDENCIES
   omniauth-google-oauth2
   pg (~> 0.18)
   pry-byebug
+  pry-rails
   rack-timeout
   rails (~> 5.1.1)
   ridgepole
   rspec-rails
   sass-rails (~> 5.0)
+  slack-notifier
   spring
   uglifier (>= 1.3.0)
   unicorn
