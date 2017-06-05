@@ -10,8 +10,8 @@ class Rule < ApplicationRecord
 
   def slack_attachment
     {
-      fallback: "#{query} by #{user.name}",
-      text: "<#{Rails.application.routes.url_helpers.root_url}|Rule #{query} by #{user.name}>",
+      fallback: "#{name} by #{user.name}",
+      text: "<#{Rails.application.routes.url_helpers.root_url}|Rule #{name} by #{user.name}>",
       color: "#439FE0"
     }
   end
