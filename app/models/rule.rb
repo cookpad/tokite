@@ -2,9 +2,9 @@ class Rule < ApplicationRecord
   belongs_to :user
 
   # TODO: Performance
-  def self.matched_rules(*texts)
+  def self.matched_rules(event)
     Rule.all.to_a.select do |rule|
-      texts.any?{|text| text.match(rule.query) }
+      event.fields.values.any?{|text| text.match(rule.query) }
     end
   end
 

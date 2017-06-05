@@ -18,7 +18,7 @@ class Hook
 
   def fire!
     return unless event.notify?
-    Rule.matched_rules(*event.target_texts).each do |rule|
+    Rule.matched_rules(event).each do |rule|
       attachment = event.slack_attachment
       attachment[:fallback] += "\n\n#{rule.slack_attachment_fallback}"
       attachment[:text] += "\n\n#{rule.slack_attachment_text}"
