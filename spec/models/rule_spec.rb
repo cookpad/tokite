@@ -7,6 +7,7 @@ RSpec.describe Rule, type: :model do
     before do
       FactoryGirl.create(:rule, query: "foo")
       FactoryGirl.create(:rule, query: "(?:foo|bar)")
+      FactoryGirl.create(:rule, query: "/(?:foo|bar)/")
       FactoryGirl.create(:rule, query: "bar")
       hook_event.hook_params[:pull_request][:title] = "This is foo."
     end
@@ -60,18 +61,15 @@ RSpec.describe Rule, type: :model do
     end
 
     context "with matched quoted word" do
-      let(:query) { %("title \\"title\\"") }
+      let(:query) { %("title title") }
       before do
-        hook_event.hook_params[:pull_request][:title] = %(title "title")
+        hook_event.hook_params[:pull_request][:title] = %(title title)
       end
       it { is_expected.to eq(true) }
     end
 
-    context "with matched quoted word" do
-      let(:query) { %("title \\"title\\"") }
-      before do
-        hook_event.hook_params[:pull_request][:title] = %(title title)
-      end
+    context "with unmatched quoted word" do
+      let(:query) { %("title title") }
       it { is_expected.to eq(false) }
     end
   end

@@ -1,4 +1,6 @@
 class Rule < ApplicationRecord
+  attr_reader :search_query
+
   belongs_to :user
 
   # TODO: Performance
@@ -8,8 +10,12 @@ class Rule < ApplicationRecord
     end
   end
 
+  def search_query
+    @search_query ||= SearchQuery.parse(query)
+  end
+
   def match?(event)
-    event.fields.values.any?{|text| text.match(query) }
+    search_query.match?(event.fields)
   end
 
   def slack_attachment_fallback
