@@ -4,8 +4,12 @@ class Rule < ApplicationRecord
   # TODO: Performance
   def self.matched_rules(event)
     Rule.all.to_a.select do |rule|
-      event.fields.values.any?{|text| text.match(rule.query) }
+      rule.match?(event)
     end
+  end
+
+  def match?(event)
+    event.fields.values.any?{|text| text.match(query) }
   end
 
   def slack_attachment_fallback
