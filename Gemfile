@@ -24,6 +24,9 @@ gem 'slack-notifier'
 gem 'ridgepole'
 gem 'parslet'
 
+gem 'sentry-raven', require: false
+gem 'raven-transports-fluentd', require: false
+
 group :development, :test do
   gem 'byebug'
   gem 'pry-byebug'
