@@ -2,6 +2,8 @@ module HookEvent
   class IssueComment < BaseEvent
     def fields
       {
+        event: "issue_comment",
+        repo: hook_params[:repository][:full_name],
         body: hook_params[:comment][:body],
         user: hook_params[:comment][:user][:login],
       }

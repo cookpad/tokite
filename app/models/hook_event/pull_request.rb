@@ -2,6 +2,8 @@ module HookEvent
   class PullRequest < BaseEvent
     def fields
       {
+        event: "pull_request",
+        repo: hook_params[:repository][:full_name],
         title: hook_params[:pull_request][:title],
         body: hook_params[:pull_request][:body],
         user: hook_params[:pull_request][:user][:login],

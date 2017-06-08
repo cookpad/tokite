@@ -2,6 +2,8 @@ module HookEvent
   class Issues < BaseEvent
     def fields
       {
+        event: "issues",
+        repo: hook_params[:repository][:full_name],
         title: hook_params[:issue][:title],
         body: hook_params[:issue][:body],
         user: hook_params[:issue][:user][:login],
