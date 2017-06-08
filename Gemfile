@@ -22,6 +22,7 @@ gem 'omniauth-google-oauth2'
 gem 'denv'
 gem 'slack-notifier'
 gem 'ridgepole'
+gem 'parslet'
 
 group :development, :test do
   gem 'byebug'
