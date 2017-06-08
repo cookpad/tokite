@@ -1,4 +1,4 @@
-# Tokite
+# Tokite [![CircleCI](https://circleci.com/gh/hogelog/tokite.svg?style=svg)](https://circleci.com/gh/hogelog/tokite)
 
 Tokite send GitHub event (pull-request, issue and comment) to Slack.
  
