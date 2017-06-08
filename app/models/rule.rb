@@ -11,7 +11,7 @@ class Rule < ApplicationRecord
   end
 
   def search_query
-    @search_query ||= SearchQuery.parse(query)
+    @search_query ||= SearchQuery.new(query)
   end
 
   def match?(event)

@@ -1,7 +1,7 @@
 require "parslet"
 
 class SearchQuery
-  attr_reader :tree
+  attr_reader :query, :tree
 
   class ParseError < StandardError
   end
@@ -31,13 +31,14 @@ class SearchQuery
   end
 
   def self.parse(query)
-    new(Array.wrap(parser.parse(query)))
+    Array.wrap(parser.parse(query))
   rescue Parslet::ParseFailed => e
     raise ParseError, e
   end
 
-  def initialize(tree)
-    @tree = tree
+  def initialize(query)
+    @query = query
+    @tree = Array.wrap(self.class.parse(query))
   end
 
   def match?(doc)
