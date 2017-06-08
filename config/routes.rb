@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   get "sign_in", to: "sessions#new", as: "sign_in"
   get "auth/google_oauth2/callback", to: "sessions#create"
   delete "sign_out", to: "sessions#destroy", as: "sign_out"
+
+  get "site/sha", to: "sha#show"
 end
