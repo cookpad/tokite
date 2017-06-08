@@ -12,7 +12,7 @@ $ vim .env
 $ ./bin/rails s
 ```
 
-### Configuration
+## Configuration
 <table>
 <tr><th>GOOGLE_CLIENT_ID</th><td>Google+ OAuth2 client ID</td></tr>
 <tr><th>GOOGLE_CLIENT_SECRET</th><td>Google+ OAuth2 client secret</td></tr>
@@ -21,4 +21,5 @@ $ ./bin/rails s
 <tr><th>SLACK_WEBHOOK_URL</th><td>Slack incoming webhook url</td></tr>
 <tr><th>SLACK_NAME (optional)</th><td>Slack notification user name</td></tr>
 <tr><th>SLACK_ICON_EMOJI (optional)</th><td>Slack notification icon</td></tr>
+<tr><th>SENTRY_DSN (optional)</th><td>Sentry DSN</td></tr>
 </table>
