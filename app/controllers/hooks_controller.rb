@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class HooksController < ActionController::Base
-  protect_from_forgery with: :null_session
-
+class HooksController < ActionController::API
   GITHUB_EVENT_HEADER = "X-GitHub-Event"
 
   def create
