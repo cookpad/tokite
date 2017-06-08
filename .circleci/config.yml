@@ -1,0 +1,38 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/tokite
+    docker:
+      - image: circleci/ruby:2.4.1-node
+      - image: circleci/postgres:9.4.12-alpine
+    steps:
+      - checkout
+
+      # Restore bundle cache
+      - type: cache-restore
+        key: tokite-{{ checksum "Gemfile.lock" }}
+
+      # Bundle install dependencies
+      - run: bundle install --path vendor/bundle
+
+      # Store bundle cache
+      - type: cache-save
+        key: tokite-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
+
+      # Database setup
+      - run: bundle exec rake db:create
+      - run: RAILS_ENV=test bundle exec rake ridgepole:apply
+
+      # Run rspec in parallel
+      - type: shell
+        command: |
+          bundle exec rspec --profile 10 \
+                            --format RspecJunitFormatter \
+                            --out /tmp/test-results/rspec.xml \
+                            --format progress
+
+      # Save artifacts
+      - type: store_test_results
+        path: /tmp/test-results
