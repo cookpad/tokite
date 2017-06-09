@@ -39,6 +39,6 @@ class RulesController < ApplicationController
   end
 
   def rule_params
-    params.require(:rule).permit(:name, :query, :channel, :additional_text)
+    params.require(:rule).permit(:name, :query, :channel, :icon_emoji, :additional_text)
   end
 end
