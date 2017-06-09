@@ -16,3 +16,53 @@
     = f.text_field :additional_text, size: 100
   %div
     = f.submit
+
+- if @rule.persisted?
+  = link_to "Delete rule", user_rule_path(@rule_user, @rule), method: :delete, data: { confirm: %(Delete "#{@rule.name}"?) }
+
+%div
+  %h2 Supported query type
+  %table{ border: 1 }
+    %tr
+      %th Name
+      %th Example
+    %tr
+      %td Plain text
+      %td hoge fuga moge
+    %tr
+      %td Quoted text
+      %td "hoge fuga moge"
+    %tr
+      %td Regular expression
+      %td /(hoge|fuga|moge)/
+
+  %h2 Supported query field
+  %table{ border: 1 }
+    %tr
+      %th Field
+      %th Description
+      %th Example
+    %tr
+      %td repo:
+      %td Match repository name.
+      %td repo:hogelog/tokite
+    %tr
+      %td title:
+      %td Match pull_request/issues title.
+      %td title:Bug
+    %tr
+      %td event:
+      %td Match event type pull_request, issues or issue_comment.
+      %td event:/(pull_request|issues)/
+    %tr
+      %td body:
+      %td Match body text.
+      %td body:"review please"
+    %tr
+      %td user:
+      %td Match user name like "hogelog".
+      %td user:hogelog
+    %tr
+      %td unspecified
+      %td Match any field.
+      %td hogelog

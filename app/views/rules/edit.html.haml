@@ -1,5 +1,3 @@
 %h2= link_to @rule_user.name, user_rules_path(@rule_user)
 %h1 Edit rule
 = render "form"
-
-= link_to "Delete rule", user_rule_path(@rule_user, @rule), method: :delete, data: { confirm: %(Delete "#{@rule.name}"?) }
