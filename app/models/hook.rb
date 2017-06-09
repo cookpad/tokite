@@ -22,12 +22,10 @@ class Hook
       attachment = event.slack_attachment
       attachment[:fallback] += "\n\n#{rule.slack_attachment_fallback}"
       attachment[:text] += "\n\n#{rule.slack_attachment_text}"
-      payload = {
-        channel: rule.channel,
-        text: event.slack_text,
-        attachments: [attachment],
-      }
-      NotifyGithubHookEventJob.perform_now(payload)
+      additional_text = rule.additional_text
+
+      NotifyGithubHookEventJob.perform_now(channel: rule.channel, text: event.slack_text, attachments: [attachment])
+      NotifyGithubHookEventJob.perform_now(channel: rule.channel, text: additional_text, parse: "full") if additional_text.present?
     end
   end
 end
