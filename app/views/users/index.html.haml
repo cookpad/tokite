@@ -5,3 +5,6 @@
       %p
         = link_to "Edit", edit_user_path(user)
         = link_to "Rules", [user, :rules]
+
+= link_to "Create group", users_path, method: :post, data: { confirm: %(Create Group?) }
+
