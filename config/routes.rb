@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: "top#show"
 
   resources :hooks, only: %w(create)
-  resources :users, only: %w(index) do
+  resources :users, only: %w(index edit update) do
     resources :rules, only: %w(index new create edit update destroy)
   end
   resources :rules, only: %w(index)

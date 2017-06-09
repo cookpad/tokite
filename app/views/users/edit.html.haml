@@ -1,0 +1,4 @@
+%h1 Edit user
+= render "form"
+
+= link_to "Delete user", user_path(@user), method: :delete, data: { confirm: %(Delete "#{@user.name}"?) }
