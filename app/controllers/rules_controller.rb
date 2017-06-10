@@ -12,8 +12,12 @@ class RulesController < ApplicationController
   end
 
   def create
-    @rule = rule_user.rules.create!(rule_params)
-    redirect_to edit_user_rule_path(params[:user_id], @rule)
+    @rule = rule_user.rules.new(rule_params)
+    if @rule.save
+      redirect_to edit_user_rule_path(params[:user_id], @rule)
+    else
+      render "new"
+    end
   end
 
   def edit
@@ -22,8 +26,12 @@ class RulesController < ApplicationController
 
   def update
     @rule = rule_user.rules.find(params[:id])
-    @rule.update!(rule_params)
-    redirect_to edit_user_rule_path(params[:user_id], @rule)
+    @rule.assign_attributes(rule_params)
+    if @rule.save
+      redirect_to edit_user_rule_path(params[:user_id], @rule)
+    else
+      render "edit"
+    end
   end
 
   def destroy

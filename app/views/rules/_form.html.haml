@@ -1,3 +1,9 @@
+%h2 Errors
+- if @rule.errors.count > 0
+  %ul
+    - @rule.errors.full_messages.each do |message|
+      %li= message
+
 = form_for [@rule_user, @rule] do |f|
   %div
     = f.label :name

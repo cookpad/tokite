@@ -3,6 +3,8 @@ class Rule < ApplicationRecord
 
   belongs_to :user
 
+  validate :validate_query
+
   # TODO: Performance
   def self.matched_rules(event)
     Rule.all.to_a.select do |rule|
@@ -32,5 +34,11 @@ class Rule < ApplicationRecord
 
   def user_link
     "<#{Rails.application.routes.url_helpers.user_rules_url(user)}|#{user.name}>"
+  end
+
+  def validate_query
+    SearchQuery.parse(query)
+  rescue SearchQuery::ParseError => e
+    errors.add(:query, e.message)
   end
 end

@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Rule, type: :model do
   let(:hook_payload) { JSON.parse(payload_json("pull_request.json")).with_indifferent_access }
   let(:hook_event) { HookEvent::PullRequest.new(hook_payload) }
+
   describe ".matched_rules" do
     before do
       FactoryGirl.create(:rule, query: "foo")
@@ -71,6 +72,25 @@ RSpec.describe Rule, type: :model do
     context "with unmatched quoted word" do
       let(:query) { %("title title") }
       it { is_expected.to eq(false) }
+    end
+  end
+
+  describe "validates :query" do
+    let(:query) { "foo bar" }
+    let(:rule) { FactoryGirl.build(:rule, query: query) }
+
+    it { expect(rule).to be_valid }
+
+    context "with unclosed quoted text" do
+      let(:query) { 'foobar "foo bar' }
+
+      it { expect(rule).not_to be_valid }
+    end
+
+    context "with unclosed regular expression" do
+      let(:query) { 'foobar /foo bar' }
+
+      it { expect(rule).not_to be_valid }
     end
   end
 end
