@@ -10,11 +10,12 @@ class SearchQuery
     rule(:space) { match('\s').repeat(1) }
     rule(:space?) { space.maybe }
 
+    rule(:escape) { str('\\').ignore }
     rule(:quot) { str('"') }
-    rule(:quoted_char) { match('[^"]') }
+    rule(:quoted_char) { escape >> any | match('[^"]') }
     rule(:char) { match('[^\s"]') }
     rule(:slash) { str('/') }
-    rule(:regexp_char) { match('[^/]') }
+    rule(:regexp_char) { escape >> any | match('[^/]') }
 
     rule(:regexp_word) { slash >> regexp_char.repeat(1).as(:regexp_word) >> slash }
     rule(:quot_word) { quot >> quoted_char.repeat(1).as(:word) >> quot }
