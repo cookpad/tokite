@@ -2,3 +2,6 @@
 # yarn lockfile v1
 
 
+bulma@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.4.2.tgz#3be8c832cf6658bfc421ecb41f6dc5a8a0c7c0e5"
