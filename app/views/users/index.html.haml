@@ -1,10 +1,17 @@
-%ul
-  - @users.each do |user|
-    %li
-      %p= user.name
-      %p
-        = link_to "Edit", edit_user_path(user)
-        = link_to "Rules", [user, :rules]
+%table.table.is-striped
+  %thead
+    %tr
+      %th ID
+      %th Name
+      %th
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.id
+        %td= user.name
+        %td
+          = link_to "Edit", edit_user_path(user), class: "button is-small"
+          = link_to "Rules", [user, :rules], class: "button is-small"
 
-= link_to "Create group", users_path, method: :post, data: { confirm: %(Create Group?) }
+= link_to "Create group", users_path, method: :post, data: { confirm: %(Create Group?) }, class: "button is-primary"
 

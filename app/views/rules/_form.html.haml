@@ -1,74 +1,60 @@
-%h2 Errors
-- if @rule.errors.count > 0
-  %ul
-    - @rule.errors.full_messages.each do |message|
-      %li= message
-
 = form_for [@rule_user, @rule] do |f|
-  %div
-    = f.label :name
-    = f.text_field :name, size: 40
-  %div
-    = f.label :query
-    = f.text_field :query, size: 400
-  %div
-    = f.label :channel
-    = f.text_field :channel, size: 40
-  %div
-    = f.label :icon_emoji
-    = f.text_field :icon_emoji, size: 10
-  %div
-    = f.label :additional_text
-    = f.text_field :additional_text, size: 100
-  %div
-    = f.submit
+  = form_text_field f, :name, size: 40, class: "input"
+  = form_text_field f, :query, size: 400, class: "input"
+  = form_text_field f, :channel, size: 40, class: "input"
+  = form_text_field f, :icon_emoji, size: 40, class: "input"
+  = form_text_field f, :additional_text, size: 40, class: "input"
+  .field
+    = f.submit class: "button is-primary"
+    - if @rule.persisted?
+      = link_to "Delete rule", user_rule_path(@rule_user, @rule), method: :delete, data: { confirm: %(Delete "#{@rule.name}"?) }, class: "button is-danger is-pulled-right"
 
-- if @rule.persisted?
-  = link_to "Delete rule", user_rule_path(@rule_user, @rule), method: :delete, data: { confirm: %(Delete "#{@rule.name}"?) }
+.message.vspace-40
+  .message-header
+    Query description
+  .message-body
+    %h2.title Supported query type
+    %table.table.is-bordered
+      %tr
+        %th Name
+        %th Example
+      %tr
+        %td Plain text
+        %td hoge fuga moge
+      %tr
+        %td Quoted text
+        %td "hoge fuga moge"
+      %tr
+        %td Regular expression
+        %td /(hoge|fuga|moge)/
 
-%div
-  %h2 Supported query type
-  %table{ border: 1 }
-    %tr
-      %th Name
-      %th Example
-    %tr
-      %td Plain text
-      %td hoge fuga moge
-    %tr
-      %td Quoted text
-      %td "hoge fuga moge"
-    %tr
-      %td Regular expression
-      %td /(hoge|fuga|moge)/
-
-  %h2 Supported query field
-  %table{ border: 1 }
-    %tr
-      %th Field
-      %th Description
-      %th Example
-    %tr
-      %td repo:
-      %td Match repository name.
-      %td repo:hogelog/tokite
-    %tr
-      %td title:
-      %td Match pull_request/issues title.
-      %td title:Bug
-    %tr
-      %td event:
-      %td Match event type pull_request, issues or issue_comment.
-      %td event:/(pull_request|issues)/
-    %tr
-      %td body:
-      %td Match body text.
-      %td body:"review please"
-    %tr
-      %td user:
-      %td Match user name like "hogelog".
-      %td user:hogelog
-    %tr
-      %td unspecified
-      %td Match any field.
-      %td hogelog
+    %h2 Supported query field
+    %table.table.is-bordered
+      %tr
+        %th Field
+        %th Description
+        %th Example
+      %tr
+        %td repo:
+        %td Match repository name.
+        %td repo:hogelog/tokite
+      %tr
+        %td title:
+        %td Match pull_request or issues title.
+        %td title:Bug
+      %tr
+        %td event:
+        %td Match event type pull_request, issues or issue_comment.
+        %td event:/(pull_request|issues)/
+      %tr
+        %td body:
+        %td Match body text.
+        %td body:"review please"
+      %tr
+        %td user:
+        %td Match user name.
+        %td user:hogelog
+      %tr
+        %td unspecified
+        %td Match any field.
+        %td hogelog

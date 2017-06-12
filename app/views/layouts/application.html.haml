@@ -9,10 +9,13 @@
 
   %body
     - if current_user
-      .global_header
-        = link_to_unless_current "Top", root_path
-        = link_to_unless_current "Users", users_path
-        = link_to_unless_current "My Rules", user_rules_path(current_user)
-        = link_to_unless_current "All Rules", rules_path
+      %nav.nav.has-shadow
+        .container
+          .nav-left
+            = nav_list_item "Top", root_path
+            = nav_list_item "Users", users_path
+            = nav_list_item "My Rules", user_rules_path(current_user)
+            = nav_list_item "All Rules", rules_path
 
-    = yield
+    %section.section
+      = yield

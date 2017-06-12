@@ -12,3 +12,7 @@
  *
  *= require bulma/bulma
  */
+
+.vspace-40 {
+  margin: 40px 0;
+}
