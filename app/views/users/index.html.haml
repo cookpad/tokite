@@ -3,14 +3,13 @@
     %tr
       %th ID
       %th Name
-      %th
   %tbody
     - @users.each do |user|
       %tr
         %td= user.id
-        %td= user.name
         %td
-          = link_to "Edit", edit_user_path(user), class: "button is-small"
+          -#= user.name
+          = link_to user.name, edit_user_path(user)
           = link_to "Rules", [user, :rules], class: "button is-small"
 
 = link_to "Create group", users_path, method: :post, data: { confirm: %(Create Group?) }, class: "button is-primary"

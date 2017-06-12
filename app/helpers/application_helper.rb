@@ -1,6 +1,6 @@
 module ApplicationHelper
-  def nav_list_item(name, path)
-    if current_page?(path)
+  def nav_list_item(name, path, controllers)
+    if controllers.include?(params[:controller])
       link_to(name, path, class: "nav-item is-tab is-active")
     else
       link_to(name, path, class: "nav-item is-tab")

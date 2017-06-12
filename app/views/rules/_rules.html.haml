@@ -1,0 +1,8 @@
+.content
+  %h3 Rules
+  %ul
+    - user.rules.order(:id).each do |rule|
+      %li= link_to rule.name, edit_user_rule_path(user, rule)
+
+.content
+  = link_to "New Rule", new_user_rule_path(user), class: "button is-primary"
