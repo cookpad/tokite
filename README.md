@@ -22,4 +22,5 @@ $ ./bin/rails s
 <tr><th>SLACK_NAME (optional)</th><td>Slack notification user name</td></tr>
 <tr><th>SLACK_ICON_EMOJI (optional)</th><td>Slack notification icon</td></tr>
 <tr><th>SENTRY_DSN (optional)</th><td>Sentry DSN</td></tr>
+<tr><th>APP_HOST (optional)</th><td>Application host url</td></tr>
 </table>
