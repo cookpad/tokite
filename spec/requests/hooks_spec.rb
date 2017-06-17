@@ -4,7 +4,7 @@ require 'json'
 RSpec.describe "Hook", type: :request do
   describe "#create" do
     let(:headers) {
-      { HooksController::GITHUB_EVENT_HEADER => event }
+      { Tokite::HooksController::GITHUB_EVENT_HEADER => event }
     }
     let(:params) {
       JSON.parse(payload_json("#{event}.json"))
@@ -16,8 +16,8 @@ RSpec.describe "Hook", type: :request do
       let(:query) { "event:pull_request repo:hogelog/test-repo user:hogelog title:/./ body:/./" }
 
       it "fire hook" do
-        expect_any_instance_of(Hook).to receive(:fire!).and_call_original
-        expect_any_instance_of(NotifyGithubHookEventJob).to receive(:perform)
+        expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
+        expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
         post hooks_path, params: params, headers: headers
       end
     end
@@ -27,8 +27,8 @@ RSpec.describe "Hook", type: :request do
       let(:query) { "event:issues repo:hogelog/test-repo user:hogelog title:/./ body:/./" }
 
       it "fire hook" do
-        expect_any_instance_of(Hook).to receive(:fire!).and_call_original
-        expect_any_instance_of(NotifyGithubHookEventJob).to receive(:perform)
+        expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
+        expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
         post hooks_path, params: params, headers: headers
       end
     end
@@ -38,8 +38,8 @@ RSpec.describe "Hook", type: :request do
       let(:query) { "event:issue_comment repo:hogelog/test-repo user:hogelog body:/./" }
 
       it "fire hook" do
-        expect_any_instance_of(Hook).to receive(:fire!).and_call_original
-        expect_any_instance_of(NotifyGithubHookEventJob).to receive(:perform)
+        expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
+        expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
         post hooks_path, params: params, headers: headers
       end
     end

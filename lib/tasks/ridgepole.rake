@@ -1,21 +1,40 @@
-def ridgepole_exec(args)
-  env = ENV.fetch("RAILS_ENV", "development")
-  sh "bundle", "exec", "ridgepole", "-c", "config/database.yml", "-E", env, *args
-end
+require 'pry'
 
 namespace :ridgepole do
+  def engine_path(file)
+    Tokite::Engine.root.join(file).to_s
+  end
+
+  def app_path(file)
+    Rails.root.join(file).to_s
+  end
+
+  def ridgepole_exec(*args)
+    yml = Rails.root.join("config/database.yml").to_s
+    sh "bundle", "exec", "ridgepole", "-c", yml, "-E", Rails.env, *args
+  end
+
   desc "Export current schema"
   task :export do
-    ridgepole_exec(%w(--export db/Schemafile --split))
+    ridgepole_exec("--export", app_path("schema/Schemafile"), "--split")
   end
 
   desc "Apply Schemafile"
   task :apply do
-    ridgepole_exec(%w(--file db/Schemafile -a))
+    ridgepole_exec("--file", app_path("schema/Schemafile"), "-a")
   end
 
   desc "Apply Schemafile (dry-run)"
   task :"dry-run" do
-    ridgepole_exec(%w(--file db/Schemafile -a --dry-run))
+    ridgepole_exec("--file", app_path("schema/Schemafile"), "-a", "--dry-run")
+  end
+
+  desc "Install schema"
+  task :install_schema do
+    schema_dir = app_path("schema")
+    mkdir(schema_dir) unless Dir.exist?(schema_dir)
+    Dir.glob("#{engine_path("schema")}/*").each do |f|
+      cp f, schema_dir
+    end
   end
 end
