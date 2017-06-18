@@ -4,12 +4,20 @@ Tokite send GitHub event (pull-request, issue and comment) to Slack.
  
 Notification setting are personalized and customizable by query.
 
-## Development
-```console
-$ ./bin/setup
-$ vim .env
-...
-$ ./bin/rails s
+## Installation
+Tokite works as rails mountable engine.
+
+Add this line to your rails application's Gemfile:
+```ruby
+gem "tokite"
+```
+
+And mount engine.
+
+```ruby
+Rails.application.routes.draw do
+  mount Tokite::Engine => "/"
+end
 ```
 
 ## Configuration
