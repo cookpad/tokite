@@ -20,6 +20,18 @@ Rails.application.routes.draw do
 end
 ```
 
+### Setup database
+```console
+$ ./bin/rails db:create
+$ ./bin/rails tokite:ridgepole:install
+$ ./bin/rails tokite:ridgepole:apply
+```
+
+### Setup yarn pkg
+```console
+$ ./bin/rails tokite:yarn:install
+```
+
 ## Configuration
 <table>
 <tr><th>GOOGLE_CLIENT_ID</th><td>Google+ OAuth2 client ID</td></tr>
