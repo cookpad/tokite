@@ -1,5 +1,3 @@
-require 'pry'
-
 namespace :tokite do
   namespace :ridgepole do
     def engine_path(file)
