@@ -1,0 +1,12 @@
+create_table "tokite_rules", force: :cascade do |t|
+  t.integer  "user_id",                      null: false
+  t.string   "name",            limit: 50,   null: false
+  t.string   "query",           limit: 2000, null: false
+  t.string   "channel",         limit: 100,  null: false
+  t.string   "icon_emoji",      limit: 20,   null: false, default: ""
+  t.string   "additional_text", limit: 200,  null: false, default: ""
+  t.datetime "created_at",                   null: false
+  t.datetime "updated_at",                   null: false
+end
+
+add_index "tokite_rules", ["user_id", "name"], name: "tokite_rule_uniq_name", unique: true, using: :btree

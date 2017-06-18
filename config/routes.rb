@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+Tokite::Engine.routes.draw do
   root to: "top#show"
 
   resources :hooks, only: %w(create)

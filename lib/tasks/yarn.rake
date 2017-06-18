@@ -1,1 +1,3 @@
-task "assets:precompile" => %w(yarn:install)
+namespace :tokite do
+
+end
