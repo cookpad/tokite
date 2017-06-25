@@ -22,7 +22,7 @@ module Tokite
       rule(:quot_word) { quot >> quoted_char.repeat(1).as(:word) >> quot }
       rule(:plain_word) { (match('[^\s/"]') >> match('[^\s]').repeat).as(:word) }
       rule(:field) { match('\w').repeat(1).as(:field) }
-      rule(:word) { (field >> str(':')).maybe >> (regexp_word | quot_word | plain_word) }
+      rule(:word) { (field >> str(':') >> space?).maybe >> (regexp_word | quot_word | plain_word) }
   
       rule(:query) { word >> (space >> word).repeat }
       root :query

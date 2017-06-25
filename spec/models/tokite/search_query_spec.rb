@@ -39,5 +39,15 @@ RSpec.describe Tokite::SearchQuery, type: :model do
         expect(subject.first[:regexp_word].to_s).to eq('foo /bar/')
       end
     end
+
+    context "with field" do
+      let(:query) { 'foo: bar' }
+
+      it do
+        expect(subject.size).to eq(1)
+        expect(subject.first[:field].to_s).to eq('foo')
+        expect(subject.first[:word].to_s).to eq('bar')
+      end
+    end
   end
 end
