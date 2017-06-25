@@ -73,6 +73,11 @@ RSpec.describe Tokite::Rule, type: :model do
       let(:query) { %("title title") }
       it { is_expected.to eq(false) }
     end
+
+    context "with case unmatched word" do
+      let(:query) { "TITLE" }
+      it { is_expected.to eq(true) }
+    end
   end
 
   describe "validates :query" do

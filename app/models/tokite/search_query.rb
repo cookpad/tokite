@@ -46,20 +46,17 @@ module Tokite
     def match?(doc)
       tree.all? do |word|
         field = word[:field]
-        if word[:regexp_word]
-          regexp = word[:regexp_word].to_s
-          if field
-            doc[field.to_sym]&.match(regexp)
-          else
-            doc.values.any?{|text| text.match(regexp) }
-          end
+        if field
+          targets = doc[field.to_sym] ? [doc[field.to_sym].downcase] : []
         else
-          value = word[:word].to_s
-          if field
-            doc[field.to_sym]&.index(value)
-          else
-            doc.values.any?{|text| text.index(value) }
-          end
+          targets = doc.values.map(&:downcase)
+        end
+        if word[:regexp_word]
+          regexp = word[:regexp_word].to_s.downcase
+          targets.any?{|text| text.match(regexp) }
+        else
+          value = word[:word].to_s.downcase
+          targets.any?{|text| text.index(value) }
         end
       end
     end
