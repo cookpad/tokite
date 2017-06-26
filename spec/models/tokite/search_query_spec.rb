@@ -14,7 +14,7 @@ RSpec.describe Tokite::SearchQuery, type: :model do
     end
 
     context "quoted text with escaped quot" do
-      let(:query) { '"foo \\"bar\\""' }
+      let(:query) { '"foo\ \"bar\""' }
 
       it do
         expect(subject.size).to eq(1)
@@ -32,11 +32,11 @@ RSpec.describe Tokite::SearchQuery, type: :model do
     end
 
     context "regular expression with escaped character" do
-      let(:query) { '/foo \\/bar\\//' }
+      let(:query) { '/\Afoo \/bar\/\z/' }
 
       it do
         expect(subject.size).to eq(1)
-        expect(subject.first[:regexp_word].to_s).to eq('foo /bar/')
+        expect(subject.first[:regexp_word].to_s).to eq('\Afoo /bar/\z')
       end
     end
 

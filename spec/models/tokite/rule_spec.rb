@@ -80,7 +80,13 @@ RSpec.describe Tokite::Rule, type: :model do
     end
 
     context "with case unmatched regular expression" do
-      let(:query) { '/\\\\ATITLE\\\\z/' }
+      let(:query) { '/\ATITLE\z/' }
+      it { is_expected.to eq(true) }
+    end
+
+    context "with backslash regular expression" do
+      let(:query) { 'body:/\AThis is \w+.\z/' }
+      let(:body) { "This is body." }
       it { is_expected.to eq(true) }
     end
   end
