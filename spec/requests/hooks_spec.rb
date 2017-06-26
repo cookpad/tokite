@@ -43,5 +43,16 @@ RSpec.describe "Hook", type: :request do
         post hooks_path, params: params, headers: headers
       end
     end
+
+    context "with duplicated rules" do
+      let(:event) { "issue_comment" }
+      let(:query) { "event:issue_comment repo:hogelog/test-repo user:hogelog body:/./" }
+      let!(:duplicated_rule) { FactoryGirl.create(:rule, query: query) }
+
+      it "preserves duplicated notification" do
+        expect(Tokite::NotifyGithubHookEventJob).to receive(:perform_now).once
+        post hooks_path, params: params, headers: headers
+      end
+    end
   end
 end

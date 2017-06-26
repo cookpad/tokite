@@ -19,15 +19,27 @@ module Tokite
   
     def fire!
       return unless event.notify?
+      payloads = []
       Rule.matched_rules(event).each do |rule|
         attachment = event.slack_attachment
         attachment[:fallback] += "\n\n#{rule.slack_attachment_fallback}"
         attachment[:text] += "\n\n#{rule.slack_attachment_text}"
         emoji = rule.icon_emoji.chomp.presence
         additional_text = rule.additional_text
-  
-        notify!(channel: rule.channel, text: event.slack_text, icon_emoji: emoji, attachments: [attachment])
-        notify!(channel: rule.channel, text: additional_text, icon_emoji: emoji, parse: "full") if additional_text.present?
+
+        if payloads.none? {|payload| payload[:channel] == rule.channel && payload[:icon_emoji] == emoji && payload[:additional_text] == additional_text }
+          payloads << {
+            channel: rule.channel,
+            text: event.slack_text,
+            icon_emoji: emoji,
+            additional_text: additional_text,
+            attachments: [attachment],
+          }
+        end
+      end
+      payloads.each do |payload|
+        notify!(channel: payload[:channel], text: payload[:text], icon_emoji: payload[:emoji], attachments: payload[:attachment])
+        notify!(channel: payload[:channel], text: payload[:additional_text], icon_emoji: payload[:emoji], parse: "full") if payload[:additional_text].present?
       end
     end
   
