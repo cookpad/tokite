@@ -8,8 +8,16 @@ jobs:
     steps:
       - checkout
 
+      - type: cache-restore
+        key: gemfile-{{ checksum "Gemfile" }}
+
       # Bundle install dependencies
       - run: bundle install --path vendor/bundle
+
+      - type: cache-save
+        key: gemfile-{{ checksum "Gemfile" }}
+        paths:
+          - vendor/bundle
 
       # Database setup
       - run: bundle exec rake db:create
