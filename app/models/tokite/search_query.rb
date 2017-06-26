@@ -3,7 +3,7 @@ require "parslet"
 module Tokite
   class SearchQuery
     attr_reader :query, :tree
-  
+
     class ParseError < StandardError
     end
   
@@ -37,7 +37,7 @@ module Tokite
     rescue Parslet::ParseFailed => e
       raise ParseError, e
     end
-  
+
     def initialize(query)
       @query = query
       @tree = Array.wrap(self.class.parse(query))
@@ -52,8 +52,8 @@ module Tokite
           targets = doc.values.map(&:downcase)
         end
         if word[:regexp_word]
-          regexp = word[:regexp_word].to_s.downcase
-          targets.any?{|text| text.match(regexp) }
+          regexp = Regexp.compile(word[:regexp_word].to_s, Regexp::IGNORECASE)
+          targets.any?{|text| regexp.match?(text) }
         else
           value = word[:word].to_s.downcase
           targets.any?{|text| text.index(value) }

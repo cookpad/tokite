@@ -78,6 +78,11 @@ RSpec.describe Tokite::Rule, type: :model do
       let(:query) { "TITLE" }
       it { is_expected.to eq(true) }
     end
+
+    context "with case unmatched regular expression" do
+      let(:query) { '/\\\\ATITLE\\\\z/' }
+      it { is_expected.to eq(true) }
+    end
   end
 
   describe "validates :query" do
