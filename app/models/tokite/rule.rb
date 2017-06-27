@@ -26,7 +26,7 @@ module Tokite
     end
   
     def slack_attachment_text
-      "Notification from #{rule_name_link} (#{user_link}) "
+      "#{rule_name_link} (#{user_link}) "
     end
   
     def rule_name_link
