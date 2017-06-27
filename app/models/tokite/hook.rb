@@ -31,14 +31,14 @@ module Tokite
           payloads << {
             channel: rule.channel,
             text: event.slack_text,
-            icon_emoji: emoji,
+            emoji: emoji,
             additional_text: additional_text,
             attachments: [attachment],
           }
         end
       end
       payloads.each do |payload|
-        notify!(channel: payload[:channel], text: payload[:text], icon_emoji: payload[:emoji], attachments: payload[:attachment])
+        notify!(channel: payload[:channel], text: payload[:text], icon_emoji: payload[:emoji], attachments: payload[:attachments])
         notify!(channel: payload[:channel], text: payload[:additional_text], icon_emoji: payload[:emoji], parse: "full") if payload[:additional_text].present?
       end
     end
