@@ -14,7 +14,6 @@ module Tokite
       unless user.persisted?
         user.update!(
           name: auth[:info][:name],
-          email: auth[:info][:email],
           image_url: auth[:info][:image],
         )
       end

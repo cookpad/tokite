@@ -7,7 +7,6 @@ module Tokite
       create!(
         provider: "GROUP",
         uid: uuid,
-        email: uuid,
         image_url: "",
         name: name
       )
