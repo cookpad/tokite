@@ -11,13 +11,14 @@ module Tokite
         provider: auth[:provider],
         uid: auth[:uid],
       )
-      user.assign_attributes(
-        name: auth[:info][:name],
-        email: auth[:info][:email],
-        image_url: auth[:info][:image],
-      )
-      user.save! if user.changed?
-  
+      unless user.persisted?
+        user.update!(
+          name: auth[:info][:name],
+          email: auth[:info][:email],
+          image_url: auth[:info][:image],
+        )
+      end
+
       session[:user_id] = user.id
       redirect_to root_path
     end
