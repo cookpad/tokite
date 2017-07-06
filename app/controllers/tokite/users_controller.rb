@@ -6,6 +6,7 @@ module Tokite
   
     def create
       @user = User.create_group_user!("group name")
+      flash[:info] = "User created."
       redirect_to edit_user_path(@user)
     end
   
@@ -16,6 +17,7 @@ module Tokite
     def update
       @user = User.find(params[:id])
       @user.update!(user_params)
+      flash[:info] = "User updated."
       redirect_to edit_user_path(@user)
     end
   
@@ -23,6 +25,7 @@ module Tokite
       @user = User.find(params[:id])
       if @user.group_user?
         @user.destroy!
+        flash[:info] = "User deleted."
         redirect_to users_path
       else
         head 400
