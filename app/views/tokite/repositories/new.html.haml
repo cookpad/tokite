@@ -1,0 +1,18 @@
+- if @repositories.present?
+  = form_tag repositories_path do |f|
+    %ul
+      - @repositories.each do |repo|
+        %li.field
+          .control
+            %label.checkbox
+              = check_box_tag "names[]", repo.name, false, id: "names_#{sanitize_to_id(repo.name)}", multiple: true
+              = repo.name
+              = link_to "@", repo.url
+
+    .vspace-40
+
+    .field
+      .control
+        = submit_tag "Import repositories", class: "button is-primary"
+- else
+  No importable repositories.

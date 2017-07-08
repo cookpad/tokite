@@ -1,0 +1,13 @@
+- if current_user_token
+  = link_to "New repositories", new_repository_path, class: "button is-primary"
+
+.vspace-40
+
+%h1.title Watching repositories
+
+%table.table.is-bordered
+  - @repositories.each do |repo|
+    %tr
+      %td= link_to repo.name, repo.url
+      - if show_admin_menu?
+        %td= link_to "Unwatch", repo, method: :delete, class: "button is-danger", data: { confirm: "Unhook repository?" }

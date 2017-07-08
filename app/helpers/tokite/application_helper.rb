@@ -26,5 +26,9 @@ module Tokite
           end
       end
     end
+
+    def show_admin_menu?
+      params[:admin]
+    end
   end
 end

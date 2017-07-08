@@ -1,7 +1,7 @@
 require "omniauth-github"
 
 Tokite::Engine.config.middleware.use OmniAuth::Builder do
-  options = { }
+  options = { scope: "repo,write:repo_hook" }
   host = ENV["GITHUB_HOST"]
   if host.present?
     options.merge!(
