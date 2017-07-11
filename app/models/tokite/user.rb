@@ -16,5 +16,9 @@ module Tokite
     def group_user?
       provider == "GROUP"
     end
+
+    def name_with_provider
+      "#{name} (#{provider})"
+    end
   end
 end

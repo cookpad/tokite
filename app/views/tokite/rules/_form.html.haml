@@ -4,10 +4,11 @@
   = form_text_field f, :channel, size: 40, class: "input"
   = form_text_field f, :icon_emoji, size: 40, class: "input"
   = form_text_field f, :additional_text, size: 40, class: "input"
-  .field
-    = f.submit class: "button is-primary"
+  .field.columns
+    .column.is-8= f.submit "Update", class: "button is-primary"
     - if @rule.persisted?
-      = link_to "Delete rule", rule_path(@rule), method: :delete, data: { confirm: %(Delete "#{@rule.name}"?) }, class: "button is-danger is-pulled-right"
+      .column.is-2= link_to "Transfer", new_rule_transfers_path(@rule), class: "button is-primary"
+      .column.is-2= link_to "Delete", rule_path(@rule), method: :delete, data: { confirm: %(Delete "#{@rule.name}"?) }, class: "button is-danger"
 
 .message.vspace-40
   .message-header

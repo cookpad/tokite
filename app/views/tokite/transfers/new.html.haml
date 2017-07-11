@@ -1,0 +1,8 @@
+%h1.title
+  Transfer
+  = link_to @rule.name, edit_rule_path(@rule)
+
+= form_for [@rule, @transfer] do |f|
+  = f.collection_select :user_id, @users, :id, :name_with_provider
+  .field.columns
+    .column.is-8= f.submit "Transfer", class: "button is-primary"

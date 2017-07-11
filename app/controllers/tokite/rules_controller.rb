@@ -14,7 +14,7 @@ module Tokite
       @rule = @rule_user.rules.new(rule_params)
       if @rule.save
         flash[:info] = "Rule created."
-        redirect_to edit_rule_path(@rule)
+        redirect_to user_path(@rule.user_id)
       else
         render "new"
       end
@@ -30,23 +30,23 @@ module Tokite
       @rule.assign_attributes(rule_params)
       if @rule.save
         flash[:info] = "Rule updated."
-        redirect_to edit_rule_path(@rule)
+        redirect_to user_path(@rule.user_id)
       else
         render "edit"
       end
     end
-  
+
     def destroy
       @rule = Rule.find(params[:id])
       @rule.destroy!
       flash[:info] = "Rule deleted."
-      redirect_to user_rules_path(params[:user_id])
+      redirect_to user_path(@rule.user_id)
     end
 
     private
 
     def rule_params
-      params.require(:rule).permit(:name, :query, :channel, :icon_emoji, :additional_text)
+      params.require(:rule).permit(:user_id, :name, :query, :channel, :icon_emoji, :additional_text)
     end
   end
 end

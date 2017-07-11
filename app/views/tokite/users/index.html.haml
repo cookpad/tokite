@@ -8,7 +8,7 @@
       %tr
         %td= user.id
         %td
-          = link_to user.name, user_path(user)
+          = link_to user.name_with_provider, user_path(user)
 
 = link_to "Create group", users_path, method: :post, data: { confirm: %(Create Group?) }, class: "button is-primary"
 
