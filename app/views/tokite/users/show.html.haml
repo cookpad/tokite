@@ -1,0 +1,5 @@
+%h2.title
+  = @user.name
+  = link_to "Edit", edit_user_path(@user), class: "button is-primary is-small"
+
+= render "tokite/rules/rules", user: @user

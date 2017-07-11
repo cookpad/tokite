@@ -3,7 +3,11 @@ module Tokite
     def index
       @users = User.all.order(:id)
     end
-  
+
+    def show
+      @user = User.find(params[:id])
+    end
+
     def create
       @user = User.create_group_user!("group name")
       flash[:info] = "User created."
@@ -18,7 +22,7 @@ module Tokite
       @user = User.find(params[:id])
       @user.update!(user_params)
       flash[:info] = "User updated."
-      redirect_to edit_user_path(@user)
+      redirect_to user_path(@user)
     end
   
     def destroy

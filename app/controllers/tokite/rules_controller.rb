@@ -1,11 +1,7 @@
 module Tokite
   class RulesController < ApplicationController
     def index
-      if params[:user_id]
-        @users = User.where(id: params[:user_id]).includes(:rules)
-      else
-        @users = User.all.includes(:rules)
-      end
+      @users = User.all.includes(:rules)
     end
   
     def new

@@ -8,9 +8,7 @@
       %tr
         %td= user.id
         %td
-          -#= user.name
-          = link_to user.name, edit_user_path(user)
-          = link_to "Rules", [user, :rules], class: "button is-small"
+          = link_to user.name, user_path(user)
 
 = link_to "Create group", users_path, method: :post, data: { confirm: %(Create Group?) }, class: "button is-primary"
 
