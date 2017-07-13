@@ -30,7 +30,7 @@ module Tokite
     end
   
     def rule_name_link
-      "<#{Tokite::Engine.routes.url_helpers.edit_user_rule_url(user, self)}|#{name}>"
+      "<#{Tokite::Engine.routes.url_helpers.edit_rule_url(self)}|#{name}>"
     end
   
     def user_link

@@ -7,7 +7,7 @@
   .field
     = f.submit class: "button is-primary"
     - if @rule.persisted?
-      = link_to "Delete rule", user_rule_path(@rule_user, @rule), method: :delete, data: { confirm: %(Delete "#{@rule.name}"?) }, class: "button is-danger is-pulled-right"
+      = link_to "Delete rule", rule_path(@rule), method: :delete, data: { confirm: %(Delete "#{@rule.name}"?) }, class: "button is-danger is-pulled-right"
 
 .message.vspace-40
   .message-header
