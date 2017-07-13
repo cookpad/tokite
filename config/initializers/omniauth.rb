@@ -1,7 +1,16 @@
-require "omniauth-google-oauth2"
+require "omniauth-github"
 
 Tokite::Engine.config.middleware.use OmniAuth::Builder do
-  provider :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"], {
-    hd: ENV["GOOGLE_HOSTED_DOMAIN"].present? ? ENV["GOOGLE_HOSTED_DOMAIN"] : nil,
-  }
+  options = { scope: "repo,write:repo_hook" }
+  host = ENV["GITHUB_HOST"]
+  if host.present?
+    options.merge!(
+      client_options: {
+        site: "#{host}/api/v3",
+        authorize_url: "#{host}/login/oauth/authorize",
+        token_url: "#{host}/login/oauth/access_token",
+      }
+    )
+  end
+  provider :github, ENV["GITHUB_CLIENT_ID"], ENV["GITHUB_CLIENT_SECRET"], options
 end

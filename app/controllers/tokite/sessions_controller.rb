@@ -12,14 +12,17 @@ module Tokite
         uid: auth[:uid],
       )
       unless user.persisted?
-        user.update!(
+        user.assign_attributes(
           name: auth[:info][:name],
-          email: auth[:info][:email],
           image_url: auth[:info][:image],
         )
+        User.transaction do
+          user.save!
+        end
       end
 
       session[:user_id] = user.id
+      session[:token] = auth[:credentials][:token]
       redirect_to root_path
     end
   
