@@ -3,7 +3,7 @@ Tokite::Engine.routes.draw do
 
   resources :hooks, only: %w(create)
   resources :users, only: %w(index show create edit update destroy) do
-    resources :rules, only: %w(new create edit update destroy)
+    resources :rules, only: %w(new create edit update destroy), shallow: true
   end
   resources :rules, only: %w(index)
 
