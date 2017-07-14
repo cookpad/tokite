@@ -7,7 +7,8 @@ module Tokite
     end
 
     def new
-      @repositories = octokit_client.repositories.map do |repo|
+      github_repos = octokit_client.repositories.select {|r| r.permissions.admin }
+      @repositories = github_repos.map do |repo|
         Repository.new(name: repo.full_name, url: repo.html_url)
       end
       Repository.all.pluck(:name).each do |existing_name|
