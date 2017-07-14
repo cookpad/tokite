@@ -5,7 +5,7 @@
         %li.field
           .control
             %label.checkbox
-              = check_box_tag "names[]", repo.name, false, id: "names_#{sanitize_to_id(repo.name)}", multiple: true
+              = check_box_tag "names[]", repo.name, true, id: "names_#{sanitize_to_id(repo.name)}", multiple: true
               = repo.name
               = link_to "@", repo.url
 
