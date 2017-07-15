@@ -7,7 +7,7 @@ module Tokite
     end
 
     def new
-      github_repos = octokit_client.repositories.select {|r| r.permissions.admin }
+      github_repos = octokit_client.repositories.select{|r| r.permissions.admin }.delete_if(&:fork)
       @repositories = github_repos.map do |repo|
         Repository.new(name: repo.full_name, url: repo.html_url)
       end
