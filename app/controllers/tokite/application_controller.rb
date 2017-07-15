@@ -13,7 +13,7 @@ module Tokite
     end
 
     def current_user_token
-      session[:token]
+      current_user&.token
     end
 
     def require_login

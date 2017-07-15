@@ -1,0 +1,8 @@
+create_table "tokite_secure_user_tokens", force: :cascade do |t|
+  t.integer  "user_id",               null: false
+  t.string   "token",      limit: 40, null: false
+  t.datetime "created_at",            null: false
+  t.datetime "updated_at",            null: false
+end
+
+add_index "tokite_secure_user_tokens", ["user_id"], name: "tokite_secure_user_token_uniq_user_id", unique: true, using: :btree

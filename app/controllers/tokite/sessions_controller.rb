@@ -7,22 +7,8 @@ module Tokite
   
     def create
       auth = request.env["omniauth.auth"]
-      user = User.find_or_initialize_by(
-        provider: auth[:provider],
-        uid: auth[:uid],
-      )
-      unless user.persisted?
-        user.assign_attributes(
-          name: auth[:info][:name],
-          image_url: auth[:info][:image],
-        )
-        User.transaction do
-          user.save!
-        end
-      end
-
+      user = User.login!(auth)
       session[:user_id] = user.id
-      session[:token] = auth[:credentials][:token]
       redirect_to root_path
     end
   
