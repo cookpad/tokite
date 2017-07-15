@@ -35,7 +35,7 @@ module Tokite
     end
   
     def user_link
-      "<#{Tokite::Engine.routes.url_helpers.user_rules_url(user)}|#{user.name}>"
+      "<#{Tokite::Engine.routes.url_helpers.user_url(user)}|#{user.name}>"
     end
   
     def validate_query
