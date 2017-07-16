@@ -50,7 +50,7 @@ module Tokite
         if field
           targets = doc[field.to_sym] ? [doc[field.to_sym].downcase] : []
         else
-          targets = DEFAULT_FIELDS.map{|field| doc[field].downcase }.compact
+          targets = DEFAULT_FIELDS.map{|field| doc[field]&.downcase }.compact
         end
         if word[:regexp_word]
           regexp = Regexp.compile(word[:regexp_word].to_s, Regexp::IGNORECASE)

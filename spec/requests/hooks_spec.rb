@@ -13,7 +13,7 @@ RSpec.describe "Hook", type: :request do
 
     context "with pull_request" do
       let(:event) { "pull_request" }
-      let(:query) { "event:pull_request repo:hogelog/test-repo user:hogelog title:/./ body:/./" }
+      let(:query) { "event:pull_request repo:hogelog/test-repo user:hogelog title:/./ body:/./ /./" }
 
       it "fire hook" do
         expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
@@ -24,7 +24,7 @@ RSpec.describe "Hook", type: :request do
 
     context "with issues" do
       let(:event) { "issues" }
-      let(:query) { "event:issues repo:hogelog/test-repo user:hogelog title:/./ body:/./" }
+      let(:query) { "event:issues repo:hogelog/test-repo user:hogelog title:/./ body:/./ /./" }
 
       it "fire hook" do
         expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
@@ -35,7 +35,7 @@ RSpec.describe "Hook", type: :request do
 
     context "with issue_comment" do
       let(:event) { "issue_comment" }
-      let(:query) { "event:issue_comment repo:hogelog/test-repo user:hogelog body:/./" }
+      let(:query) { "event:issue_comment repo:hogelog/test-repo user:hogelog body:/./ /./" }
 
       it "fire hook" do
         expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
@@ -46,7 +46,7 @@ RSpec.describe "Hook", type: :request do
 
     context "with duplicated rules" do
       let(:event) { "issue_comment" }
-      let(:query) { "event:issue_comment repo:hogelog/test-repo user:hogelog body:/./" }
+      let(:query) { "event:issue_comment repo:hogelog/test-repo user:hogelog body:/./ /./" }
       let!(:duplicated_rule) { FactoryGirl.create(:rule, query: query) }
 
       it "preserves duplicated notification" do
