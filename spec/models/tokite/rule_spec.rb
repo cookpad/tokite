@@ -42,13 +42,18 @@ RSpec.describe Tokite::Rule, type: :model do
     end
 
     context "with matched multiple words" do
-      let(:query) { "title body hogelog" }
+      let(:query) { "title body" }
       it { is_expected.to eq(true) }
     end
 
     context "with unmatched multiple words" do
-      let(:query) { "title body hogelog foobar" }
+      let(:query) { "title body foobar" }
       it { is_expected.to eq(false) }
+    end
+
+    context "with unlabeled word" do
+      let(:query) { "hogelog" }
+      it { is_expected.not_to eq(true) }
     end
 
     context "with matched labeled word" do

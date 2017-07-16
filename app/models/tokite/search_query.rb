@@ -4,6 +4,8 @@ module Tokite
   class SearchQuery
     attr_reader :query, :tree
 
+    DEFAULT_FIELDS = %i(title body)
+
     class ParseError < StandardError
     end
   
@@ -48,7 +50,7 @@ module Tokite
         if field
           targets = doc[field.to_sym] ? [doc[field.to_sym].downcase] : []
         else
-          targets = doc.values.map(&:downcase)
+          targets = DEFAULT_FIELDS.map{|field| doc[field].downcase }.compact
         end
         if word[:regexp_word]
           regexp = Regexp.compile(word[:regexp_word].to_s, Regexp::IGNORECASE)
