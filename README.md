@@ -43,3 +43,33 @@ $ ./bin/rails tokite:yarn:install
 <tr><th>SLACK_ICON_EMOJI (optional)</th><td>Slack notification icon</td></tr>
 <tr><th>APP_HOST (optional)</th><td>Application host url</td></tr>
 </table>
+
+## Usage
+### Supported Event
+
+Tokite support only below events now.
+
+- pull_request
+- issues
+- issue_comment
+
+### Supported query type
+
+<table>
+<tr><th>Name</th><th>Example</th></tr>
+<tr><td>Plain text</td><td>hoge fuga moge</td></tr>
+<tr><td>Quoted text</td><td>hoge/fuga/moge</td></tr>
+<tr><td>Regular expression</td><td>/hoge|fuga|moge/</td></tr>
+</table>
+
+### Supported query field
+
+<table>
+<tr><th>Name</th><th>Description</th><th>Example</th></tr>
+<tr><td>repo:</td><td>Match repository name.</td><td>repo:hogelog/tokite</td></tr>
+<tr><td>title:</td><td>Match pull_request or issues title.</td><td>title:Bug</td></tr>
+<tr><td>event:</td><td>Match event type pull_request, issues or issue_comment.</td><td>event:/(pull_request|issues)/</td></tr>
+<tr><td>body:</td><td>Match body text.</td><td>body:"review please"</td></tr>
+<tr><td>user:</td><td>Match user name.</td><td>user:hogelog</td></tr>
+<tr><td>unspecified</td><td>Match title or body field.</td><td>hogelog</td></tr>
+</table>
