@@ -27,7 +27,7 @@ module Tokite
         emoji = rule.icon_emoji.chomp.presence
         additional_text = rule.additional_text
 
-        if payloads.none? {|payload| payload[:channel] == rule.channel && payload[:icon_emoji] == emoji && payload[:additional_text] == additional_text }
+        if payloads.none? {|payload| payload[:channel] == rule.channel && payload[:emoji] == emoji && payload[:additional_text] == additional_text }
           payloads << {
             channel: rule.channel,
             text: event.slack_text,
