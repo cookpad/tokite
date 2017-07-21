@@ -57,8 +57,9 @@ Tokite support only below events now.
 
 <table>
 <tr><th>Name</th><th>Example</th></tr>
-<tr><td>Plain text</td><td>hoge fuga moge</td></tr>
-<tr><td>Quoted text</td><td>hoge/fuga/moge</td></tr>
+<tr><td>Plain word</td><td>hoge fuga moge</td></tr>
+<tr><td>Quoted word</td><td>"hoge fuga moge"</td></tr>
+<tr><td>Regular expression word</td><td>/hoge|fuga|moge/</td></tr>
 <tr><td>Regular expression</td><td>/hoge|fuga|moge/</td></tr>
 </table>
 
