@@ -26,7 +26,7 @@ module Tokite
       rule(:field) { match('\w').repeat(1).as(:field) }
       rule(:word) { exclude.maybe >> (field >> str(':') >> space?).maybe >> (regexp_word | quot_word | plain_word) }
   
-      rule(:query) { word >> (space >> word).repeat }
+      rule(:query) { space? >> word >> (space >> word).repeat >> space? }
       root :query
     end
   

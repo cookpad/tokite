@@ -4,6 +4,16 @@ RSpec.describe Tokite::SearchQuery, type: :model do
   describe ".parse" do
     subject { Tokite::SearchQuery.parse(query) }
 
+    context "spaced words" do
+      let(:query) { 'foo  bar' }
+
+      it do
+        expect(subject.size).to eq(2)
+        expect(subject[0][:word].to_s).to eq('foo')
+        expect(subject[1][:word].to_s).to eq('bar')
+      end
+    end
+
     context "quoted text" do
       let(:query) { '"foo bar"' }
 
@@ -61,8 +71,17 @@ RSpec.describe Tokite::SearchQuery, type: :model do
       end
     end
 
+    context "with prefix and suffix space" do
+      let(:query) { ' bar ' }
+
+      it do
+        expect(subject.size).to eq(1)
+        expect(subject.first[:word].to_s).to eq('bar')
+      end
+    end
+
     context "with some words" do
-      let(:query) { '/./  -foo:"hoge fuga"' }
+      let(:query) { ' /./  -foo:"hoge fuga" ' }
 
       it do
         expect(subject.size).to eq(2)
