@@ -71,5 +71,5 @@ Tokite support only below events now.
 <tr><td>event:</td><td>Match event type pull_request, issues or issue_comment.</td><td>event:/(pull_request|issues)/</td></tr>
 <tr><td>body:</td><td>Match body text.</td><td>body:"review please"</td></tr>
 <tr><td>user:</td><td>Match user name.</td><td>user:hogelog</td></tr>
-<tr><td>unspecified</td><td>Match title or body field.</td><td>hogelog</td></tr>
+<tr><td>unspecified</td><td>Match title or body field.</td><td>review please</td></tr>
 </table>
