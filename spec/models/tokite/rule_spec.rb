@@ -94,6 +94,18 @@ RSpec.describe Tokite::Rule, type: :model do
       let(:body) { "This is body." }
       it { is_expected.to eq(true) }
     end
+
+    context "with matched exclude word" do
+      let(:query) { 'body:/\AThis is \w+.\z/ -user:/hogelog/' }
+      let(:body) { "This is body." }
+      it { is_expected.to eq(false) }
+    end
+
+    context "with unmatched exclude word" do
+      let(:query) { 'body:/\AThis is \w+.\z/ -user:fugalog' }
+      let(:body) { "This is body." }
+      it { is_expected.to eq(true) }
+    end
   end
 
   describe "validates :query" do

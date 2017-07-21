@@ -22,8 +22,9 @@ module Tokite
       rule(:regexp_word) { slash >> regexp_char.repeat(1).as(:regexp_word) >> slash }
       rule(:quot_word) { quot >> quoted_char.repeat(1).as(:word) >> quot }
       rule(:plain_word) { (match('[^\s/"]') >> match('[^\s]').repeat).as(:word) }
+      rule(:exclude) { match('-').as(:exclude) }
       rule(:field) { match('\w').repeat(1).as(:field) }
-      rule(:word) { (field >> str(':') >> space?).maybe >> (regexp_word | quot_word | plain_word) }
+      rule(:word) { exclude.maybe >> (field >> str(':') >> space?).maybe >> (regexp_word | quot_word | plain_word) }
   
       rule(:query) { word >> (space >> word).repeat }
       root :query
@@ -54,11 +55,12 @@ module Tokite
         end
         if word[:regexp_word]
           regexp = Regexp.compile(word[:regexp_word].to_s, Regexp::IGNORECASE)
-          targets.any?{|text| regexp.match?(text) }
+          matched = targets.any?{|text| regexp.match?(text) }
         else
           value = word[:word].to_s.downcase
-          targets.any?{|text| text.index(value) }
+          matched = targets.any?{|text| text.index(value) }
         end
+        word[:exclude].present? ? !matched : matched
       end
     end
   end
