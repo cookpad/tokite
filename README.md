@@ -60,7 +60,7 @@ Tokite support only below events now.
 <tr><td>Plain word</td><td>hoge fuga moge</td></tr>
 <tr><td>Quoted word</td><td>"hoge fuga moge"</td></tr>
 <tr><td>Regular expression word</td><td>/hoge|fuga|moge/</td></tr>
-<tr><td>Regular expression</td><td>/hoge|fuga|moge/</td></tr>
+<tr><td>Exclude word</td><td> -/(hoge|fuga|moge)/ -user:hogelog</td></tr>
 </table>
 
 ### Supported query field
