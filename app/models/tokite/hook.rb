@@ -7,6 +7,7 @@ module Tokite
       "issues" => HookEvent::Issues,
       "issue_comment" => HookEvent::IssueComment,
       "pull_request_review" => HookEvent::PullRequestReview,
+      "pull_request_review_comment" => HookEvent::PullRequestReviewComment,
     }.freeze
   
     def self.fire!(github_event, hook_params)
