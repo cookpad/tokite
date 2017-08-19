@@ -54,5 +54,17 @@ RSpec.describe "Hook", type: :request do
         post hooks_path, params: params, headers: headers
       end
     end
+
+    context "when slack returns error" do
+      let(:event) { "pull_request" }
+      let(:query) { %(event:pull_request repo:hogelog/test-repo user:hogelog title:/./ body:/./ /./ -"unmatched word") }
+
+      it "captures exception" do
+        expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
+        expect_any_instance_of(Slack::Notifier).to receive(:ping).and_raise(Slack::Notifier::APIError)
+        expect(Tokite::ExceptionLogger).to receive(:log).once
+        post hooks_path, params: params, headers: headers
+      end
+    end
   end
 end
