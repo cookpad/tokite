@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Tokite::Hook, type: :model do
-  describe "fire!" do
-    xcontext "for debug" do
+  xdescribe "fire!" do
+    context "for debug" do
       before do
         FactoryGirl.create(:rule, query: "/./", channel: "#test-private", additional_text: "@hogelog Hi!")
       end
@@ -22,6 +22,11 @@ RSpec.describe Tokite::Hook, type: :model do
 
       context "with pull request" do
         let(:event) { "pull_request" }
+        it { Tokite::Hook.fire!(event, params) }
+      end
+
+      context "with pull request review" do
+        let(:event) { "pull_request_review" }
         it { Tokite::Hook.fire!(event, params) }
       end
     end
