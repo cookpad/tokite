@@ -3,7 +3,8 @@ module Tokite
     attr_reader :search_query
   
     belongs_to :user
-  
+
+    validates :name, presence: true
     validate :validate_query
     validate :validate_user_id
     validate :validate_channel
