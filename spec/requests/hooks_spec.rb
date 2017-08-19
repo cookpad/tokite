@@ -55,6 +55,17 @@ RSpec.describe "Hook", type: :request do
       end
     end
 
+    context "with pull_request_review_comment" do
+      let(:event) { "pull_request_review_comment" }
+      let(:query) { %(event:pull_request_review_comment repo:hogelog/test-repo user:hogelog body:/./ /./ -"unmatched word") }
+
+      it "fire hook" do
+        expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
+        expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
+        post hooks_path, params: params, headers: headers
+      end
+    end
+
     context "with duplicated rules" do
       let(:event) { "issue_comment" }
       let(:query) { %(event:issue_comment repo:hogelog/test-repo user:hogelog body:/./ /./ -"unmatched word") }

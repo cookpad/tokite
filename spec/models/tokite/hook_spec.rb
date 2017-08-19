@@ -29,6 +29,11 @@ RSpec.describe Tokite::Hook, type: :model do
         let(:event) { "pull_request_review" }
         it { Tokite::Hook.fire!(event, params) }
       end
+
+      context "with pull request review comment" do
+        let(:event) { "pull_request_review_comment" }
+        it { Tokite::Hook.fire!(event, params) }
+      end
     end
   end
 end
