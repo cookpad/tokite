@@ -48,8 +48,8 @@
         %td title:Bug
       %tr
         %td event:
-        %td Match event type pull_request, issues or issue_comment.
-        %td event:/(pull_request|issues)/
+        %td Match event type pull_request, issues, issue_comment or pull_request_review.
+        %td event:/pull_request|issues|pull_request_review/
       %tr
         %td body:
         %td Match body text.
@@ -58,6 +58,10 @@
         %td user:
         %td Match user name.
         %td user:hogelog
+      %tr
+        %td review_state:
+        %td Match pull_request_review state.
+        %td review_state:/commented|approved|requested_changes/
       %tr
         %td unspecified
         %td Match title or body field.
