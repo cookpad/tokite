@@ -1,11 +1,15 @@
 module Tokite
   class ExceptionLogger
-    def self.configure(logger)
-      @logger = logger
+    def self.callbacks
+      @callbacks ||= []
     end
 
-    def self.log(e)
-      @logger&.log(e)
+    def self.configure(callback)
+      callbacks << callback
+    end
+
+    def self.log(e, options = {})
+      callbacks.each{|callback| callback.call(e, options) }
     end
   end
 end

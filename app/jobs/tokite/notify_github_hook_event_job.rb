@@ -7,7 +7,7 @@ module Tokite
     def perform(payload)
       Rails.application.config.slack_notifier.ping(payload)
     rescue Slack::Notifier::APIError => e
-      ExceptionLogger.log(e)
+      ExceptionLogger.log(e, level: :warn)
     end
   end
 end
