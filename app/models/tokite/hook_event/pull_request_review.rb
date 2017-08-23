@@ -29,7 +29,7 @@ module Tokite
             "#{repo} New comment by #{user} on pull request #{title}"
           when "approved"
             "#{repo} #{user} approved #{title}"
-          when "requested_changes"
+          when "changes_requested"
             "#{repo} #{user} requested changes #{title}"
         end
       end
@@ -40,7 +40,7 @@ module Tokite
           when "commented"
           when "approved"
             color = "good"
-          when "requested_changes"
+          when "changes_requested"
             color = "warning"
         end
         {
