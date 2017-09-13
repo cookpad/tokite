@@ -26,13 +26,14 @@ namespace :tokite do
     desc "Install schema"
     task :install do
       tokite_schema_dir = app_path("schema/tokite")
-      mkdir(tokite_schema_dir) unless Dir.exist?(tokite_schema_dir)
+      mkdir_p(tokite_schema_dir) unless Dir.exist?(tokite_schema_dir)
 
       schema_dir = app_path("schema")
-      mkdir(schema_dir) unless Dir.exist?(schema_dir)
+      mkdir_p(schema_dir) unless Dir.exist?(schema_dir)
 
       Dir.glob("#{engine_path("schema")}/*").each do |src_path|
         basename = File.basename(src_path)
+        next if basename == 'tokite'
         if File.exist?(File.join(tokite_schema_dir, basename))
           puts "Skip install schema #{src_path}"
         else
