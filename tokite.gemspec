@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = "Customizable Slack notification from GitHub"
   s.license     = "MIT"
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  s.files = Dir["{app,config,db,lib,schema}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
   s.add_dependency "rails", "~> 5.1.1"
   s.add_dependency "pg", "~> 0.18"
