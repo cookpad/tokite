@@ -9,7 +9,7 @@ RSpec.describe "Hook", type: :request do
     let(:params) {
       JSON.parse(payload_json("#{event}.json"))
     }
-    let!(:rule) { FactoryGirl.create(:rule, query: query, icon_emoji: ":snail:") }
+    let!(:rule) { FactoryBot.create(:rule, query: query, icon_emoji: ":snail:") }
 
     context "with pull_request" do
       let(:event) { "pull_request" }
@@ -69,7 +69,7 @@ RSpec.describe "Hook", type: :request do
     context "with duplicated rules" do
       let(:event) { "issue_comment" }
       let(:query) { %(event:issue_comment repo:hogelog/test-repo user:hogelog body:/./ /./ -"unmatched word") }
-      let!(:duplicated_rule) { FactoryGirl.create(:rule, query: query, icon_emoji: ":snail:") }
+      let!(:duplicated_rule) { FactoryBot.create(:rule, query: query, icon_emoji: ":snail:") }
 
       it "preserves duplicated notification" do
         expect(Tokite::NotifyGithubHookEventJob).to receive(:perform_now).once

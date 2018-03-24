@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :rule, class: Tokite::Rule do
     user
     sequence(:name) {|n| "name_#{n}" }
