@@ -6,10 +6,10 @@ RSpec.describe Tokite::Rule, type: :model do
 
   describe ".matched_rules" do
     before do
-      FactoryGirl.create(:rule, query: "foo")
-      FactoryGirl.create(:rule, query: "(?:foo|bar)")
-      FactoryGirl.create(:rule, query: "/(?:foo|bar)/")
-      FactoryGirl.create(:rule, query: "bar")
+      FactoryBot.create(:rule, query: "foo")
+      FactoryBot.create(:rule, query: "(?:foo|bar)")
+      FactoryBot.create(:rule, query: "/(?:foo|bar)/")
+      FactoryBot.create(:rule, query: "bar")
       hook_event.hook_params[:pull_request][:title] = "This is foo."
     end
 
@@ -23,7 +23,7 @@ RSpec.describe Tokite::Rule, type: :model do
     let(:title) { "title" }
     let(:body) { "body" }
     let(:user_login) { "hogelog" }
-    let(:rule) { FactoryGirl.create(:rule, query: query) }
+    let(:rule) { FactoryBot.create(:rule, query: query) }
     subject { rule.match?(hook_event) }
     before do
       hook_event.hook_params[:pull_request][:title] = title
@@ -110,7 +110,7 @@ RSpec.describe Tokite::Rule, type: :model do
 
   describe "validates :query" do
     let(:query) { "foo bar" }
-    let(:rule) { FactoryGirl.build(:rule, query: query) }
+    let(:rule) { FactoryBot.build(:rule, query: query) }
 
     it { expect(rule).to be_valid }
 
