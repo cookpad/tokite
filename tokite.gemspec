@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = Tokite::VERSION
   s.authors     = ["hogelog"]
   s.email       = ["konbu.komuro@gmail.com"]
-  s.homepage    = "https://github.com/hogelog/tokite/"
+  s.homepage    = "https://github.com/cookpad/tokite/"
   s.summary     = "Customizable Slack notification from GitHub"
   s.description = "Customizable Slack notification from GitHub"
   s.license     = "MIT"
