@@ -1,4 +1,4 @@
-# Tokite [![CircleCI](https://circleci.com/gh/hogelog/tokite.svg?style=svg)](https://circleci.com/gh/hogelog/tokite) [![Gem Version](https://badge.fury.io/rb/tokite.svg)](https://badge.fury.io/rb/tokite)
+# Tokite [![CircleCI](https://circleci.com/gh/cookpad/tokite.svg?style=svg)](https://circleci.com/gh/cookpad/tokite) [![Gem Version](https://badge.fury.io/rb/tokite.svg)](https://badge.fury.io/rb/tokite)
 
 Tokite send GitHub event (pull-request, issue and comment) to Slack.
  
@@ -67,7 +67,7 @@ Tokite support only below events now.
 
 <table>
 <tr><th>Name</th><th>Description</th><th>Example</th></tr>
-<tr><td>repo:</td><td>Match repository name.</td><td>repo:hogelog/tokite</td></tr>
+<tr><td>repo:</td><td>Match repository name.</td><td>repo:cookpad/tokite</td></tr>
 <tr><td>title:</td><td>Match pull_request or issues title.</td><td>title:Bug</td></tr>
 <tr><td>event:</td><td>Match event type pull_request, issues, issue_comment, pull_request_review, pull_request_review_comment.</td><td>event:/pull_request|issues|pull_request_review|pull_request_review_comment/</td></tr>
 <tr><td>body:</td><td>Match body text.</td><td>body:"review please"</td></tr>
