@@ -1,7 +1,7 @@
 module Tokite
   class Hook
     attr_reader :event
-  
+
     HOOK_EVENTS = {
       "pull_request" => HookEvent::PullRequest,
       "issues" => HookEvent::Issues,
@@ -9,16 +9,16 @@ module Tokite
       "pull_request_review" => HookEvent::PullRequestReview,
       "pull_request_review_comment" => HookEvent::PullRequestReviewComment,
     }.freeze
-  
+
     def self.fire!(github_event, hook_params)
       event_class = HOOK_EVENTS[github_event]
       Hook.new(event_class.new(hook_params)).fire! if event_class
     end
-  
+
     def initialize(event)
       @event = event
     end
-  
+
     def fire!
       return unless event.notify?
       payloads = []
@@ -44,7 +44,7 @@ module Tokite
         notify!(channel: payload[:channel], text: payload[:additional_text], icon_emoji: payload[:emoji], parse: "full") if payload[:additional_text].present?
       end
     end
-  
+
     def notify!(payload)
       NotifyGithubHookEventJob.perform_now(payload.compact)
     end
