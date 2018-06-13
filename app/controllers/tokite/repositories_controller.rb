@@ -7,9 +7,10 @@ module Tokite
     end
 
     def new
-      github_repos = octokit_client.repositories.select do |repo|
-        repo.permissions.admin and not repo.fork and not repo.archived
-      end
+      github_repos = octokit_client.repositories.
+        select{|r| r.permissions.admin }.
+        delete_if(&:fork).
+        delete_if(&:archived)
       @repositories = github_repos.map do |repo|
         Repository.new(name: repo.full_name, url: repo.html_url)
       end
@@ -21,7 +22,7 @@ module Tokite
     def create
       params[:names].each do |name|
         github_repo = octokit_client.repository(name)
-        Repository.hook!(octokit_client, github_repo) if not github_repo.archived
+        Repository.hook!(octokit_client, github_repo) unless github_repo.archived
       end
       flash[:info] = "Import repositories."
       redirect_to repositories_path
