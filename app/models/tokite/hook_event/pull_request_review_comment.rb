@@ -5,7 +5,7 @@ module Tokite
         {
           event: "pull_request_review_comment",
           repo: hook_params[:repository][:full_name],
-          body: hook_params[:comment][:body],
+          body: hook_params[:comment][:body] || "",
           user: hook_params[:comment][:user][:login],
         }
       end
@@ -26,7 +26,7 @@ module Tokite
         footer_text = "Comment by #{user} on line #{line} of #{path}"
         {
           fallback: "#{hook_params[:comment][:body]}\n#{footer_text}",
-          text: hook_params[:comment][:body],
+          text: hook_params[:comment][:body] || "",
           footer: "<#{footer_url}|#{footer_text}>"
         }
       end

@@ -5,7 +5,7 @@ module Tokite
         {
           event: "issue_comment",
           repo: hook_params[:repository][:full_name],
-          body: hook_params[:comment][:body],
+          body: hook_params[:comment][:body] || "",
           user: hook_params[:comment][:user][:login],
         }
       end
@@ -20,8 +20,8 @@ module Tokite
   
       def slack_attachment
         {
-          fallback: hook_params[:comment][:body],
-          text: hook_params[:comment][:body],
+          fallback: hook_params[:comment][:body] || "",
+          text: hook_params[:comment][:body] || "",
           color: "good",
         }
       end
