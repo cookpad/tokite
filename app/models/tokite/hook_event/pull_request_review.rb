@@ -12,13 +12,10 @@ module Tokite
       end
 
       def notify?
-        if not hook_params[:action] == "submitted" 
-          false
-        elsif hook_params[:review][:state] == "commented"
-          not hook_params[:review][:body].nil?
-        else
-          true
-        end
+        return false unless hook_params[:action] == "submitted"
+        if hook_params[:review][:state] == "commented"
+          return false unless hook_params[:review][:body].nil?
+        true
       end
 
       def slack_text
