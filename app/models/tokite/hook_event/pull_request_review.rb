@@ -12,9 +12,10 @@ module Tokite
       end
 
       def notify?
-        return false unless hook_params[:action] == "submitted"
-        if hook_params[:review][:state] == "commented"
-          hook_params[:review][:body] || ""
+        if not hook_params[:action] == "submitted" 
+          false
+        elsif hook_params[:review][:state] == "commented"
+          not hook_params[:review][:body].nil?
         else
           true
         end
