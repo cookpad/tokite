@@ -20,11 +20,18 @@ module Tokite
     end
 
     def create
-      params[:names].each do |name|
-        github_repo = octokit_client.repository(name)
-        Repository.hook!(octokit_client, github_repo) unless github_repo.archived
+      github_repos = params[:names].map do |name|
+        octokit_client.repository(name)
       end
-      flash[:info] = "Import repositories."
+      errors = github_repos.select(&:archived).map(&:full_name)
+      if errors != []
+        flash[:error] = %(Error: The following repositories have been archived: #{errors.join(", ")})
+      else
+        github_repos.each do |repo|
+          Repository.hook!(octokit_client, repo)
+        end
+        flash[:info] = "Import repositories."
+      end
       redirect_to repositories_path
     end
 
