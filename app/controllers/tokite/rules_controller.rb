@@ -46,7 +46,7 @@ module Tokite
     private
 
     def rule_params
-      params.require(:rule).permit(:user_id, :name, :query, :channel, :icon_emoji, :additional_text)
+      params.require(:rule).permit(:user_id, :name, :query, :channel, :icon_emoji, :additional_text, :display_name)
     end
   end
 end

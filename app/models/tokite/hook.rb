@@ -32,6 +32,7 @@ module Tokite
         if payloads.none? {|payload| payload[:channel] == rule.channel && payload[:emoji] == emoji && payload[:additional_text] == additional_text }
           payloads << {
             channel: rule.channel,
+            username: (rule.display_name == "") ? "tokite" : rule.display_name,
             text: event.slack_text,
             emoji: emoji,
             additional_text: additional_text,
@@ -40,8 +41,20 @@ module Tokite
         end
       end
       payloads.each do |payload|
-        notify!(channel: payload[:channel], text: payload[:text], icon_emoji: payload[:emoji], attachments: payload[:attachments])
-        notify!(channel: payload[:channel], text: payload[:additional_text], icon_emoji: payload[:emoji], parse: "full") if payload[:additional_text].present?
+        notify!(
+          channel: payload[:channel],
+          text: payload[:text],
+          icon_emoji: payload[:emoji],
+          attachments: payload[:attachments],
+          username: payload[:username]
+        )
+        notify!(
+          channel: payload[:channel],
+          text: payload[:additional_text],
+          icon_emoji: payload[:emoji],
+          parse: "full",
+          username: payload[:username]
+        ) if payload[:additional_text].present?
       end
     end
 
