@@ -7,7 +7,10 @@ module Tokite
     end
 
     def new
-      github_repos = octokit_client.repositories.select{|r| r.permissions.admin }.delete_if(&:fork)
+      github_repos = octokit_client.repositories.
+        select{|r| r.permissions.admin }.
+        delete_if(&:fork).
+        delete_if(&:archived)
       @repositories = github_repos.map do |repo|
         Repository.new(name: repo.full_name, url: repo.html_url)
       end
@@ -17,11 +20,18 @@ module Tokite
     end
 
     def create
-      params[:names].each do |name|
-        github_repo = octokit_client.repository(name)
-        Repository.hook!(octokit_client, github_repo)
+      github_repos = params[:names].map do |name|
+        octokit_client.repository(name)
       end
-      flash[:info] = "Import repositories."
+      errors = github_repos.select(&:archived).map(&:full_name)
+      if errors != []
+        flash[:error] = %(Error: The following repositories have been archived: #{errors.join(", ")})
+      else
+        github_repos.each do |repo|
+          Repository.hook!(octokit_client, repo)
+        end
+        flash[:info] = "Import repositories."
+      end
       redirect_to repositories_path
     end
 
