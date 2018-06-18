@@ -44,6 +44,19 @@ RSpec.describe "Hook", type: :request do
         expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
         post hooks_path, params: params, headers: headers
       end
+
+      context "without body comment" do
+        let(:query) { %(event:issues user:hogelog) }
+        before do 
+          params["issue"].delete("body")
+        end
+
+        it "fire hook" do
+          expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
+          expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
+          post hooks_path, params: params, headers: headers
+        end
+      end
     end
 
     context "with issue_comment" do
@@ -65,6 +78,19 @@ RSpec.describe "Hook", type: :request do
         expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
         expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
         post hooks_path, params: params, headers: headers
+      end
+
+      context "without body comment" do 
+        let(:query) { %(event:pull_request_review user:hogelog) }
+        before do 
+          params["review"].delete("body")
+        end
+
+        it "fire hook" do
+          expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
+          expect_any_instance_of(Tokite::NotifyGithubHookEventJob).not_to receive(:perform)
+          post hooks_path, params: params, headers: headers
+        end
       end
     end
 

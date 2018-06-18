@@ -5,16 +5,17 @@ module Tokite
         {
           event: "pull_request_review",
           repo: hook_params[:repository][:full_name],
-          body: hook_params[:review][:body],
+          body: hook_params[:review][:body] || "",
           user: hook_params[:review][:user][:login],
           review_state: hook_params[:review][:state],
         }
       end
 
       def notify?
-        return false unless hook_params[:action] == "submitted"
-        if hook_params[:review][:state] == "commented"
-          hook_params[:review][:body]
+        if hook_params[:action] != "submitted"
+          false
+        elsif hook_params[:review][:state] == "commented"
+          hook_params[:review][:body] != nil
         else
           true
         end
@@ -35,7 +36,6 @@ module Tokite
       end
 
       def slack_attachment
-        return unless hook_params[:review][:body]
         case hook_params[:review][:state]
           when "commented"
           when "approved"
@@ -44,8 +44,8 @@ module Tokite
             color = "warning"
         end
         {
-          fallback: hook_params[:review][:body],
-          text: hook_params[:review][:body],
+          fallback: hook_params[:review][:body] || "",
+          text: hook_params[:review][:body] || "",
           color: color,
         }
       end
