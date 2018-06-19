@@ -12,7 +12,7 @@ module Tokite
         delete_if(&:fork).
         delete_if(&:archived)
       @repositories = github_repos.map do |repo|
-        Repository.new(name: repo.full_name, url: repo.html_url)
+        Repository.new(name: repo.full_name, url: repo.html_url, private: repo.private)
       end
       Repository.all.pluck(:name).each do |existing_name|
         @repositories.delete_if {|repo| repo.name == existing_name }

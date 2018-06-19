@@ -7,6 +7,8 @@
             %label.checkbox
               = check_box_tag "names[]", repo.name, false, id: "names_#{sanitize_to_id(repo.name)}", multiple: true
               = repo.name
+              - if repo.private?
+                %span.tag.is-danger{style: "height: 1.5em"} private
               = link_to "@", repo.url
 
     .vspace-40
