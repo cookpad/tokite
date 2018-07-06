@@ -20,6 +20,8 @@
             %span.nav-item.is-tab= current_user.name_with_provider
 
     %section.section
+      - if flash[:error]
+        .notification.is-danger= flash[:error]
       - if flash[:info]
         .notification.is-success= flash[:info]
 

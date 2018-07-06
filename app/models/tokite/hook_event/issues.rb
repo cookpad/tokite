@@ -6,7 +6,7 @@ module Tokite
           event: "issues",
           repo: hook_params[:repository][:full_name],
           title: hook_params[:issue][:title],
-          body: hook_params[:issue][:body],
+          body: hook_params[:issue][:body] || "",
           user: hook_params[:issue][:user][:login],
         }
       end
@@ -24,7 +24,7 @@ module Tokite
           title: "##{hook_params[:issue][:number]} #{hook_params[:issue][:title]}",
           title_link: hook_params[:issue][:html_url],
           fallback: "#{hook_params[:issue][:title]}\n#{hook_params[:issue][:body]}",
-          text: hook_params[:issue][:body],
+          text: hook_params[:issue][:body] || "",
           color: "good",
         }
       end
