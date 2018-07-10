@@ -27,12 +27,18 @@ module Tokite
   
     def update
       @rule = Rule.find(params[:id])
-      @rule.assign_attributes(rule_params)
-      if @rule.save
-        flash[:info] = "Rule updated."
-        redirect_to user_path(@rule.user_id)
-      else
+      if !SearchQuery.verify_query(rule_params[:query])
+        flash[:error] = "Error: Invalid Regular Expression."
         render "edit"
+      else
+        @rule = Rule.find(params[:id])
+        @rule.assign_attributes(rule_params)
+        if @rule.save
+          flash[:info] = "Rule updated."
+          redirect_to user_path(@rule.user_id)
+        else
+          render "edit"
+        end
       end
     end
 

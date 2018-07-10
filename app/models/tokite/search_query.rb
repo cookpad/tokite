@@ -40,6 +40,17 @@ module Tokite
       raise ParseError, e
     end
 
+    def self.verify_query(query)
+      tree = Array.wrap(self.parse(query))
+      tree.each do |word|
+        regexp = Regexp.compile(word[:regexp_word].to_s, Regexp::IGNORECASE) if word[:regexp_word]
+      end
+      true
+    rescue RegexpError
+      false
+      true
+    end
+
     def initialize(query)
       @query = query
       @tree = Array.wrap(self.class.parse(query))
@@ -54,8 +65,12 @@ module Tokite
           targets = DEFAULT_FIELDS.map{|field| doc[field]&.downcase }.compact
         end
         if word[:regexp_word]
-          regexp = Regexp.compile(word[:regexp_word].to_s, Regexp::IGNORECASE)
-          matched = targets.any?{|text| regexp.match?(text) }
+          begin
+            regexp = Regexp.compile(word[:regexp_word].to_s, Regexp::IGNORECASE)
+            matched = targets.any?{|text| regexp.match?(text) }
+          rescue RegexpError
+            matched = false
+          end
         else
           value = word[:word].to_s.downcase
           matched = targets.any?{|text| text.index(value) }
