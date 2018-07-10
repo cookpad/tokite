@@ -48,7 +48,6 @@ module Tokite
       true
     rescue RegexpError
       false
-      true
     end
 
     def initialize(query)
