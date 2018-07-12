@@ -6,7 +6,11 @@ module Tokite
 
     DEFAULT_FIELDS = %i(title body)
 
-    class ParseError < StandardError
+    class QueryError < StandardError
+    end
+    class ParseError < QueryError
+    end
+    class RegexpError < QueryError
     end
   
     class Parser < Parslet::Parser
@@ -40,14 +44,13 @@ module Tokite
       raise ParseError, e
     end
 
-    def self.verify_query(query)
-      tree = Array.wrap(self.parse(query))
+    def self.validate(query)
+      tree = SearchQuery.parse(query)
       tree.each do |word|
-        regexp = Regexp.compile(word[:regexp_word].to_s, Regexp::IGNORECASE) if word[:regexp_word]
+        Regexp.compile(word[:regexp_word].to_s, Regexp::IGNORECASE) if word[:regexp_word]
       end
-      true
-    rescue RegexpError
-      false
+    rescue Regexp::RegexpError => e
+      raise RegexpError, e
     end
 
     def initialize(query)

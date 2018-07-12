@@ -47,8 +47,8 @@ module Tokite
     private
 
     def validate_query
-      SearchQuery.parse(query)
-    rescue SearchQuery::ParseError => e
+      SearchQuery.validate(query)
+    rescue SearchQuery::QueryError => e
       errors.add(:query, e.message)
     end
 
