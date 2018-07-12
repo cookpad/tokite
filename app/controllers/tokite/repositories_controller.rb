@@ -4,6 +4,7 @@ module Tokite
 
     def index
       @repositories = Repository.all
+      @installation_url = Pathname(ENV['GITHUB_APP_URL']).join('installations/new').to_s
     end
 
     def new
