@@ -1,13 +1,24 @@
-- if current_user_token
-  = link_to "Install tokite to your organizations", @installation_url, class: "button is-primary"
-
 .vspace-40
 
-%h1.title Watching repositories
+- if ENV['GITHUB_APP_ID']
+  - if current_user_token
+    = link_to "Install tokite to your organizations", @installation_url, class: "button is-primary"
 
-%table.table.is-bordered
-  - @repositories.each do |repo|
-    %tr
-      %td= link_to repo.name, repo.url
-      - if show_admin_menu?
-        %td= link_to "Unwatch", repo, method: :delete, class: "button is-danger", data: { confirm: "Unwatch repository?" }
+  %h1.title Organizations watched by Tokite:
+  %table.table.is-bordered
+    - @installations.each do |inst|
+      - if inst.account.type == "Organization"
+        %tr
+          %td= link_to "#{inst.account.login} (#{inst.account.type})", inst.html_url
+
+- else
+  - if current_user_token
+    = link_to "Watch new repositories", new_repository_path, class: "button is-primary"
+
+  %h1.title Watching repositories
+  %table.table.is-bordered
+    - @repositories.each do |repo|
+      %tr
+        %td= link_to repo.name, repo.url
+        - if show_admin_menu?
+          %td= link_to "Unwatch", repo, method: :delete, class: "button is-danger", data: { confirm: "Unwatch repository?" }
