@@ -4,6 +4,7 @@
   = form_text_field f, :channel, size: 40, class: "input"
   = form_text_field f, :icon_emoji, size: 40, class: "input"
   = form_text_field f, :additional_text, size: 40, class: "input"
+  = form_text_field f, :display_name, size: 40, class: "input"
   .field.columns
     .column.is-8= f.submit "Update", class: "button is-primary"
     - if @rule.persisted?
