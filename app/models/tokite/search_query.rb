@@ -8,9 +8,9 @@ module Tokite
 
     class QueryError < StandardError
     end
-    class ParseError < QueryError
+    class QueryParseError < QueryError
     end
-    class RegexpError < QueryError
+    class QueryRegexpError < QueryError
     end
   
     class Parser < Parslet::Parser
@@ -41,7 +41,7 @@ module Tokite
     def self.parse(query)
       Array.wrap(parser.parse(query))
     rescue Parslet::ParseFailed => e
-      raise ParseError, e
+      raise QueryParseError, e
     end
 
     def self.validate(query)
@@ -49,8 +49,8 @@ module Tokite
       tree.each do |word|
         Regexp.compile(word[:regexp_word].to_s, Regexp::IGNORECASE) if word[:regexp_word]
       end
-    rescue Regexp::RegexpError => e
-      raise RegexpError, e
+    rescue RegexpError => e
+      raise QueryRegexpError, e
     end
 
     def initialize(query)
