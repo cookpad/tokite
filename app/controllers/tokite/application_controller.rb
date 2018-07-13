@@ -26,7 +26,7 @@ module Tokite
     end
 
     def octokit_app_client
-      if ENV['GITHUB_APP_ID'] && !@octokit_app_client
+      if !@octokit_app_client && ENV['GITHUB_APP_ID']
         private_pem = File.read(ENV['GITHUB_APP_PEM'])
         # TODO saved directly?
         private_key = OpenSSL::PKey::RSA.new(private_pem)
