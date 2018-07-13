@@ -1,15 +1,23 @@
 
 - if ENV['GITHUB_APP_ID']
   - if current_user_token
-    = link_to "Install tokite to your organizations", @installation_url, class: "button is-primary"
+    = link_to "Install tokite to your organizations or repositories", @installation_url, class: "button is-primary"
   .vspace-40
 
   %h1.title Organizations watched by Tokite:
   %table.table.is-bordered
-    - @installations.each do |inst|
-      - if inst.account.type == "Organization"
-        %tr
-          %td= link_to "#{inst.account.login} (#{inst.account.type})", inst.html_url
+    - @orgs.each do |org|
+      %tr
+        %td
+          =link_to "#{org[:name]} (Organization)", org[:url]
+          - if org[:admin_url]
+            =link_to "Setting", org[:admin_url]
+
+  %h1.title Your repositories watched by Tokite:
+  %table.table.is-bordered
+    - @user_repos.each do |repo|
+      %tr
+        %td= link_to "#{repo[:name]}", repo[:url]
 
 - else
   - if current_user_token

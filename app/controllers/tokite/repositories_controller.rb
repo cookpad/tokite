@@ -4,9 +4,31 @@ module Tokite
 
     def index
       if ENV["GITHUB_APP_ID"]
-        opts = octokit_user_client.ensure_api_media_type(:integrations, {})
-        @installations = octokit_app_client.find_app_installations
         @installation_url = Pathname(ENV['GITHUB_APP_URL']).join('installations/new').to_s
+        all_insts = octokit_app_client.find_app_installations
+        user_name = octokit_user_client.user.login
+
+        @user_repos = []
+        all_insts.each do |inst|
+          if inst.account.login == user_name
+            res = octokit_user_client.find_installation_repositories_for_user(inst.id)
+            @user_repos << {name: res.repositories[0].full_name, url: res.repositories[0].html_url}
+          end
+        end
+
+        @orgs = []
+        user_orgs_dict = {}
+        octokit_user_client.find_user_installations.installations.each do |inst|
+          user_orgs_dict[inst.account.login] = true if inst.account.type == "Organization"
+        end
+        all_org_insts = all_insts.select do |inst| inst.account.type == "Organization" end
+        all_org_insts.each do |inst|
+          if user_orgs_dict[inst.account.login]
+            @orgs << {name: inst.account.login, url: inst.account.html_url, admin_url: inst.html_url}
+          else
+            @orgs << {name: inst.account.login, url: inst.account.html_url, admin_url: nil}
+          end
+        end
       else
         @repositories = Repository.all
       end
