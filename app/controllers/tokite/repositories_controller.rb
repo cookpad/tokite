@@ -10,8 +10,9 @@ module Tokite
 
         octokit_app_installations.each do |inst|
           if inst.account.login == octokit_user_nickname
-            res = octokit_user_client.find_installation_repositories_for_user(inst.id)
-            @user_repos << {name: res.repositories[0].full_name, url: res.repositories[0].html_url}
+            octokit_user_client.find_installation_repositories_for_user(inst.id).repositories.each do |repo|
+              @user_repos << {name: repo.full_name, url: repo.html_url}
+            end
           end
         end
 
