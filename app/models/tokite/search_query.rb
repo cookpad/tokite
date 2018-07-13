@@ -6,7 +6,11 @@ module Tokite
 
     DEFAULT_FIELDS = %i(title body)
 
-    class ParseError < StandardError
+    class QueryError < StandardError
+    end
+    class QueryParseError < QueryError
+    end
+    class QueryRegexpError < QueryError
     end
   
     class Parser < Parslet::Parser
@@ -37,7 +41,16 @@ module Tokite
     def self.parse(query)
       Array.wrap(parser.parse(query))
     rescue Parslet::ParseFailed => e
-      raise ParseError, e
+      raise QueryParseError, e
+    end
+
+    def self.validate(query)
+      tree = SearchQuery.parse(query)
+      tree.each do |word|
+        Regexp.compile(word[:regexp_word].to_s, Regexp::IGNORECASE) if word[:regexp_word]
+      end
+    rescue RegexpError => e
+      raise QueryRegexpError, e
     end
 
     def initialize(query)
@@ -54,8 +67,12 @@ module Tokite
           targets = DEFAULT_FIELDS.map{|field| doc[field]&.downcase }.compact
         end
         if word[:regexp_word]
-          regexp = Regexp.compile(word[:regexp_word].to_s, Regexp::IGNORECASE)
-          matched = targets.any?{|text| regexp.match?(text) }
+          begin
+            regexp = Regexp.compile(word[:regexp_word].to_s, Regexp::IGNORECASE)
+            matched = targets.any?{|text| regexp.match?(text) }
+          rescue RegexpError
+            matched = false
+          end
         else
           value = word[:word].to_s.downcase
           matched = targets.any?{|text| text.index(value) }
