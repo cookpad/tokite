@@ -23,7 +23,12 @@ module Tokite
         end
         all_org_insts = all_insts.select do |inst| inst.account.type == "Organization" end
         all_org_insts.each do |inst|
-          @orgs << {name: inst.account.login, url: inst.account.html_url, admin_url: user_orgs_dict[inst.account.login] ? inst.html_url : nil}
+          @orgs << {
+            name: inst.account.login,
+            limited: inst.repository_selection == "selected",
+            url: inst.account.html_url,
+            admin_url: user_orgs_dict[inst.account.login] ? inst.html_url : nil
+          }
         end
       else
         @repositories = Repository.all

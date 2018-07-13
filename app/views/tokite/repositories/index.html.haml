@@ -9,9 +9,12 @@
     - @orgs.each do |org|
       %tr
         %td
-          =link_to "#{org[:name]} (Organization)", org[:url]
+          =link_to "#{org[:name]}", org[:url]
+          - if org[:limited]
+            %span.tag.is-warning{style: "background-color: #ffdd57; border-radius: 4px;"} limited access
           - if org[:admin_url]
-            =link_to "Setting", org[:admin_url]
+            %span.some{style: "float: right"}
+              =link_to "Setting", org[:admin_url], class: "button is-small"
 
   %h1.title Your repositories watched by Tokite:
   %table.table.is-bordered
