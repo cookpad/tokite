@@ -41,5 +41,13 @@ module Tokite
         @octokit_app_client
       end
     end
+
+    def octokit_app_installations
+      @octokit_app_installations ||= octokit_app_client.find_app_installations
+    end
+
+    def octokit_user_nickname
+      @octokit_user_nickname ||= octokit_user_client.user.login
+    end
   end
 end

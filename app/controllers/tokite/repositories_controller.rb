@@ -7,11 +7,9 @@ module Tokite
         @installation_url = Pathname(ENV['GITHUB_APP_URL']).join('installations/new').to_s
         @user_repos = []
         @orgs = []
-        all_insts = octokit_app_client.find_app_installations
-        user_name = octokit_user_client.user.login
 
-        all_insts.each do |inst|
-          if inst.account.login == user_name
+        octokit_app_installations.each do |inst|
+          if inst.account.login == octokit_user_nickname
             res = octokit_user_client.find_installation_repositories_for_user(inst.id)
             @user_repos << {name: res.repositories[0].full_name, url: res.repositories[0].html_url}
           end
@@ -21,7 +19,7 @@ module Tokite
         octokit_user_client.find_user_installations.installations.each do |inst|
           user_orgs_dict[inst.account.login] = true if inst.account.type == "Organization"
         end
-        all_org_insts = all_insts.select do |inst| inst.account.type == "Organization" end
+        all_org_insts = octokit_app_installations.select do |inst| inst.account.type == "Organization" end
         all_org_insts.each do |inst|
           @orgs << {
             name: inst.account.login,
