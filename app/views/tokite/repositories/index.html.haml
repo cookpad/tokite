@@ -10,8 +10,10 @@
       %tr
         %td
           =link_to "#{org[:name]}", org[:url]
+          - if org[:admin_url]
+            %span.tag{style: "border-radius: 4px;"} admin
           - if org[:limited]
-            %span.tag.is-warning{style: "background-color: #ffdd57; border-radius: 4px;"} limited access
+            %span.tag.is-warning{style: "background-color: #ffdd57; border-radius: 4px;"} limited installation
           - if org[:admin_url]
             %span.some{style: "float: right"}
               =link_to "Setting", org[:admin_url], class: "button is-small"
