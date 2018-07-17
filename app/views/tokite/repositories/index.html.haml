@@ -6,6 +6,11 @@
 %h1.title Watching repositories
 
 %table.table.is-bordered
+  - @orgs.each do |org|
+    %tr
+      %td= link_to org.name, org.url
+      - if show_admin_menu?
+        %td= link_to "Unwatch", org, method: :delete, class: "button is-danger", data: { confirm: "Unwatch repository?" }
   - @repositories.each do |repo|
     %tr
       %td= link_to repo.name, repo.url
