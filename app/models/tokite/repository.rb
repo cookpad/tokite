@@ -19,7 +19,14 @@ module Tokite
       else
         octokit_client.create_org_hook(org_name, hook_config, hook_options)
       end
+      unhook_all_repos_under!(octokit_client, org_name)
       create!(name: org_name, url: github_org.html_url, is_org: true)
+    end
+
+    def self.unhook_all_repos_under(octokit_client, org_name)
+      Repository.all.each do |repo|
+        repo.unhook_repo!(octokit_client) if !repo.is_org && owner(repo.name) == org_name
+      end
     end
 
     def self.find_repo_hook(octokit_client, repo_name)

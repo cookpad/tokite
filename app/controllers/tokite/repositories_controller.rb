@@ -39,6 +39,10 @@ module Tokite
     def create
       org_names = params[:org_names] || []
       repo_names = params[:repo_names] || []
+      repo_names.delete_if do |repo_name|
+        org_names.find{ |org_name| Repository.owner(repo_name) == org_name }
+      end
+
       if repo_names.length + org_names.length == 0
         flash[:error] = "Error: No organization/repository was selected"
       else
