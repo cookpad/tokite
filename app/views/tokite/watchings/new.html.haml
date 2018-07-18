@@ -1,7 +1,7 @@
 - if !@orgs.present? && !@repositories.present?
   No importable repositories.
 - else
-  = form_tag repositories_path do |f|
+  = form_tag watchings_path do |f|
     - if @orgs.present?
       %h1.title Organizations
       %ul
@@ -30,4 +30,4 @@
 
     .field
       .control
-        = submit_tag "Import repositories", class: "button is-primary"
+        = submit_tag "Import organizations / repositories", class: "button is-primary"

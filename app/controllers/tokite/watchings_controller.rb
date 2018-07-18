@@ -1,5 +1,5 @@
 module Tokite
-  class RepositoriesController < ApplicationController
+  class WatchingsController < ApplicationController
     before_action :require_github_token, only: [:new, :create, :destroy]
 
     def index
@@ -51,20 +51,26 @@ module Tokite
           flash[:info] = "Import organizations/repositories."
         end
       end
-      redirect_to repositories_path
+      redirect_to watchings_path
     end
 
     def destroy
-      repo = Repository.find(params[:id])
-      repo.unhook!(octokit_client)
-      flash[:info] = "Unhook repository #{repo.name}"
-      redirect_to repositories_path
+      if params[:is_org]
+        org = Organization.find(params[:id])
+        org.unhook!(octokit_client)
+        flash[:info] = "Unhook organization #{org.name}"
+      else
+        repo = Repository.find(params[:id])
+        repo.unhook!(octokit_client)
+        flash[:info] = "Unhook repository #{repo.name}"
+      end
+      redirect_to watchings_path
     end
 
     private
 
     def require_github_token
-      redirect_to repositories_path unless current_user_token
+      redirect_to watchings_path unless current_user_token
     end
   end
 end
