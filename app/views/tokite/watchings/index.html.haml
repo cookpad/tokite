@@ -9,7 +9,7 @@
     %tr
       %td= link_to org.name, org.url
       - if show_admin_menu?
-        %td= link_to "Unwatch", watching_path(org.id, is_org: true), method: :delete, class: "button is-danger", data: { confirm: "Unwatch repository?" }
+        %td= link_to "Unwatch", watching_path(org.id, type: :org), method: :delete, class: "button is-danger", data: { confirm: "Unwatch repository?" }
 
 .vspace-40
 
@@ -19,4 +19,4 @@
     %tr
       %td= link_to repo.name, repo.url
       - if show_admin_menu?
-        %td= link_to "Unwatch", watching_path(repo.id, is_org: false), method: :delete, class: "button is-danger", data: { confirm: "Unwatch repository?" }
+        %td= link_to "Unwatch", watching_path(repo.id, type: :repo), method: :delete, class: "button is-danger", data: { confirm: "Unwatch repository?" }

@@ -55,7 +55,7 @@ module Tokite
     end
 
     def destroy
-      if params[:is_org]
+      if params[:type] == "org"
         org = Organization.find(params[:id])
         org.unhook!(octokit_client)
         flash[:info] = "Unhook organization #{org.name}"
