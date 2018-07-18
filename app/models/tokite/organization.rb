@@ -12,13 +12,13 @@ module Tokite
     end
 
     def self.find_hook(octokit_client, org_name)
-      octokit_client.org_hooks(org_name).find {|hook| hook.config.url == hooks_url }
+      octokit_client.org_hooks(org_name).find {|hook| hook.config.url == org_hooks_url }
     end
 
     def self.hook_config
       {
         content_type: "json",
-        url: hooks_url,
+        url: org_hooks_url,
       }
     end
 
@@ -28,8 +28,8 @@ module Tokite
       }
     end
 
-    def self.hooks_url
-      Tokite::Engine.routes.url_helpers.hooks_url
+    def self.org_hooks_url
+      Tokite::Engine.routes.url_helpers.org_hooks_url
     end
 
     def unhook!(octokit_client)
