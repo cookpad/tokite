@@ -3,15 +3,8 @@ module Tokite
     before_action :require_github_token, only: [:new, :create, :destroy]
 
     def index
-      @orgs = []
-      @repositories = []
-      Repository.all.each do |item|
-        if item.is_org
-          @orgs << item
-        else
-          @repositories << item
-        end
-      end
+      @orgs = Organization.all
+      @repositories = Repository.all
     end
 
     def new
@@ -23,16 +16,17 @@ module Tokite
         delete_if(&:fork).
         delete_if(&:archived)
       @orgs = github_orgs.map do |org|
-        Repository.new(name: org.login, url: URI.join(ENV["GITHUB_HOST"], org.login).to_s, is_org: true)
+        Organization.new(name: org.login, url: URI.join(ENV["GITHUB_HOST"], org.login).to_s)
       end
       @repositories = github_repos.map do |repo|
         Repository.new(name: repo.full_name, url: repo.html_url, private: repo.private)
       end
-      Repository.all.pluck(:name).each do |existing_name|
+      Organization.all.pluck(:name).each do |existing_name|
         @orgs.delete_if {|org| org.name == existing_name }
-        @repositories.
-          delete_if {|repo| repo.name == existing_name }.
-          delete_if {|repo| Repository.owner(repo.name) == existing_name }
+        @repositories.delete_if {|repo| Repository.owner(repo.name) == existing_name }
+      end
+      Repository.all.pluck(:name).each do |existing_name|
+        @repositories.delete_if {|repo| repo.name == existing_name }
       end
     end
 
@@ -52,8 +46,8 @@ module Tokite
         if errors != []
           flash[:error] = %(Error: The following repositories have been archived: #{errors.join(", ")})
         else
-          github_orgs.each{ |repo| Repository.hook_org!(octokit_client, repo) }
-          github_repos.each{ |repo| Repository.hook_repo!(octokit_client, repo) }
+          github_orgs.each{ |org| Organization.hook!(octokit_client, org) }
+          github_repos.each{ |repo| Repository.hook!(octokit_client, repo) }
           flash[:info] = "Import organizations/repositories."
         end
       end
