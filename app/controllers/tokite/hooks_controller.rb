@@ -7,9 +7,7 @@ module Tokite
     def create
       logger.debug("Hook triggered: #{github_event}")
       owner = request.request_parameters["repository"]["owner"]["login"]
-      if !Organization.exists?(name: owner)
-        Hook.fire!(github_event, request.request_parameters)
-      end
+      Hook.fire!(github_event, request.request_parameters)
       render plain: "ok"
     end
 
