@@ -11,16 +11,18 @@ module Tokite
       github_orgs = octokit_client.organization_memberships.
         select{|membership| membership.role == "admin"}.
         map{|membership| membership.organization }
+      @orgs = github_orgs.map do |org|
+        Organization.new(name: org.login, url: URI.join(ENV["GITHUB_HOST"], org.login).to_s)
+      end
+
       github_repos = octokit_client.repositories.
         select{|r| r.permissions.admin }.
         delete_if(&:fork).
         delete_if(&:archived)
-      @orgs = github_orgs.map do |org|
-        Organization.new(name: org.login, url: URI.join(ENV["GITHUB_HOST"], org.login).to_s)
-      end
       @repositories = github_repos.map do |repo|
         Repository.new(name: repo.full_name, url: repo.html_url, private: repo.private)
       end
+
       Organization.all.pluck(:name).each do |existing_name|
         @orgs.delete_if {|org| org.name == existing_name }
         @repositories.delete_if {|repo| Repository.owner(repo.name) == existing_name }
