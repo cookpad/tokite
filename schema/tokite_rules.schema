@@ -3,7 +3,7 @@ create_table "tokite_rules", force: :cascade do |t|
   t.string   "name",            limit: 50,   null: false
   t.string   "query",           limit: 2000, null: false
   t.string   "channel",         limit: 100,  null: false
-  t.string   "icon_emoji",      limit: 20,   null: false, default: ""
+  t.string   "icon_emoji",      limit: 30,   null: false, default: ""
   t.string   "additional_text", limit: 200,  null: false, default: ""
   t.datetime "created_at",                   null: false
   t.datetime "updated_at",                   null: false
