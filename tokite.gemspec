@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 5.1.1"
   s.add_dependency "pg"
-  s.add_dependency 'sass-rails', '~> 5.0'
+  s.add_dependency 'sass-rails'
   s.add_dependency "haml"
   s.add_dependency "haml-rails"
   s.add_dependency "omniauth-github"
@@ -27,6 +27,6 @@ Gem::Specification.new do |s|
   s.add_dependency "ridgepole"
   s.add_dependency "parslet"
 
-  s.add_development_dependency "rspec-rails", '>= 3.9.0'
+  s.add_development_dependency "rspec-rails"
   s.add_development_dependency "factory_bot_rails"
 end
