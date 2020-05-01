@@ -62,7 +62,15 @@ module Tokite
       tree.all? do |word|
         field = word[:field]
         if field
-          targets = doc[field.to_sym] ? [doc[field.to_sym].downcase] : []
+          targets =
+            case doc[field.to_sym]
+            when Array
+              doc[field.to_sym].map(&:downcase)
+            when nil
+              []
+            else
+              [doc[field.to_sym].downcase]
+            end
         else
           targets = DEFAULT_FIELDS.map{|field| doc[field]&.downcase }.compact
         end
