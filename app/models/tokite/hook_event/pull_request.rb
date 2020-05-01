@@ -8,6 +8,7 @@ module Tokite
           title: hook_params[:pull_request][:title],
           body: hook_params[:pull_request][:body],
           user: hook_params[:pull_request][:user][:login],
+          label: hook_params[:pull_request][:labels].map { |label| label[:name] },
         }
       end
 

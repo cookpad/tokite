@@ -8,6 +8,7 @@ module Tokite
           title: hook_params[:issue][:title],
           body: hook_params[:issue][:body] || "",
           user: hook_params[:issue][:user][:login],
+          label: hook_params[:issue][:labels].map { |label| label[:name] },
         }
       end
   
