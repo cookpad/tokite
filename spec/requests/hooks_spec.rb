@@ -18,7 +18,7 @@ RSpec.describe "Hook", type: :request do
       it "fire hook" do
         expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
         expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
-        post hooks_path, params: params, headers: headers
+        post hooks_path, params: params, headers: headers, as: :json
       end
 
       context "without body comment" do
@@ -30,7 +30,7 @@ RSpec.describe "Hook", type: :request do
         it "fire hook" do
           expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
           expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
-          post hooks_path, params: params, headers: headers
+          post hooks_path, params: params, headers: headers, as: :json
         end
       end
     end
@@ -42,7 +42,7 @@ RSpec.describe "Hook", type: :request do
       it "fire hook" do
         expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
         expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
-        post hooks_path, params: params, headers: headers
+        post hooks_path, params: params, headers: headers, as: :json
       end
 
       context "without body comment" do
@@ -54,7 +54,7 @@ RSpec.describe "Hook", type: :request do
         it "fire hook" do
           expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
           expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
-          post hooks_path, params: params, headers: headers
+          post hooks_path, params: params, headers: headers, as: :json
         end
       end
     end
@@ -66,7 +66,7 @@ RSpec.describe "Hook", type: :request do
       it "fire hook" do
         expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
         expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
-        post hooks_path, params: params, headers: headers
+        post hooks_path, params: params, headers: headers, as: :json
       end
     end
 
@@ -77,7 +77,7 @@ RSpec.describe "Hook", type: :request do
       it "fire hook" do
         expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
         expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
-        post hooks_path, params: params, headers: headers
+        post hooks_path, params: params, headers: headers, as: :json
       end
 
       context "without body comment" do 
@@ -89,7 +89,7 @@ RSpec.describe "Hook", type: :request do
         it "fire hook" do
           expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
           expect_any_instance_of(Tokite::NotifyGithubHookEventJob).not_to receive(:perform)
-          post hooks_path, params: params, headers: headers
+          post hooks_path, params: params, headers: headers, as: :json
         end
       end
     end
@@ -101,7 +101,7 @@ RSpec.describe "Hook", type: :request do
       it "fire hook" do
         expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
         expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
-        post hooks_path, params: params, headers: headers
+        post hooks_path, params: params, headers: headers, as: :json
       end
     end
 
@@ -112,7 +112,7 @@ RSpec.describe "Hook", type: :request do
 
       it "preserves duplicated notification" do
         expect(Tokite::NotifyGithubHookEventJob).to receive(:perform_now).once
-        post hooks_path, params: params, headers: headers
+        post hooks_path, params: params, headers: headers, as: :json
       end
     end
 
@@ -124,7 +124,29 @@ RSpec.describe "Hook", type: :request do
         expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
         expect_any_instance_of(Slack::Notifier).to receive(:ping).and_raise(Slack::Notifier::APIError)
         expect(Tokite::ExceptionLogger).to receive(:log).once
-        post hooks_path, params: params, headers: headers
+        post hooks_path, params: params, headers: headers, as: :json
+      end
+    end
+
+    context "with label rule" do
+      let(:event) { "issues" }
+      let(:query) { %(label:/bug|foobar/) }
+
+      it "fire hook" do
+        expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
+        expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
+        post hooks_path, params: params, headers: headers, as: :json
+      end
+    end
+
+    context "with unmatched label rule" do
+      let(:event) { "issues" }
+      let(:query) { %(label:/foo|bar/) }
+
+      it "doesn't notify to slack" do
+        expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
+        expect_any_instance_of(Tokite::NotifyGithubHookEventJob).not_to receive(:perform)
+        post hooks_path, params: params, headers: headers, as: :json
       end
     end
   end
