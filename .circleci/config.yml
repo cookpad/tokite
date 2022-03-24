@@ -3,8 +3,8 @@ jobs:
   build:
     working_directory: ~/tokite
     docker:
-      - image: circleci/ruby:2.4.10-node
-      - image: circleci/postgres:9.4.12-alpine
+      - image: cimg/ruby:2.7.5-node
+      - image: cimg/postgres:14.1
     steps:
       - checkout
 
