@@ -9,15 +9,22 @@ module Tokite
           body: hook_params[:pull_request][:body],
           user: hook_params[:pull_request][:user][:login],
           label: hook_params[:pull_request][:labels].map { |label| label[:name] },
+          requested_reviewer: hook_params[:pull_request][:requested_reviewers].map { |reviewer| reviewer[:login] },
+          requested_team: hook_params[:pull_request][:requested_teams].map { |team| team[:slug] },
         }
       end
 
       def notify?
-        %w(opened).include?(hook_params[:action])
+        %w(opened review_requested).include?(hook_params[:action])
       end
 
       def slack_text
-        "[#{hook_params[:repository][:full_name]}] Pull request submitted by <#{hook_params[:pull_request][:user][:html_url]}|#{hook_params[:pull_request][:user][:login]}>"
+        case hook_params[:action]
+        when 'opened'
+          "[#{hook_params[:repository][:full_name]}] Pull request submitted by <#{hook_params[:pull_request][:user][:html_url]}|#{hook_params[:pull_request][:user][:login]}>"
+        when 'review_requested'
+          "[#{hook_params[:repository][:full_name]}] Pull request review requested by <#{hook_params[:pull_request][:user][:html_url]}|#{hook_params[:pull_request][:user][:login]}>"
+        end
       end
 
       def slack_attachment

@@ -149,5 +149,27 @@ RSpec.describe "Hook", type: :request do
         post hooks_path, params: params, headers: headers, as: :json
       end
     end
+
+    context "with requested_reviewer rule" do
+      let(:event) { "pull_request" }
+      let(:query) { %(requested_reviewer:other_user) }
+
+      it "fire hook" do
+        expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
+        expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
+        post hooks_path, params: params, headers: headers, as: :json
+      end
+    end
+
+    context "with requested_team rule" do
+      let(:event) { "pull_request" }
+      let(:query) { %(requested_team:justice-league) }
+
+      it "fire hook" do
+        expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
+        expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
+        post hooks_path, params: params, headers: headers, as: :json
+      end
+    end
   end
 end
