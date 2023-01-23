@@ -10,8 +10,17 @@ module Tokite
           user: hook_params[:pull_request][:user][:login],
           label: hook_params[:pull_request][:labels].map { |label| label[:name] },
           requested_reviewer: hook_params[:pull_request][:requested_reviewers].map { |reviewer| reviewer[:login] },
-          requested_team: hook_params[:pull_request][:requested_teams].map { |team| team[:slug] },
+          requested_team: hook_params[:pull_request][:requested_teams].map { |team| parse_team_name(team) },
         }
+      end
+
+      def parse_team_name(team)
+        html_url = team[:html_url]
+        if /\/orgs\/(?<org_name>[^\s\/]+)\/teams\/(?<team_name>[^\s\/]+)\z/ =~ html_url
+          org_name + "/" + team_name
+        else
+          team[:slug] || team[:name]
+        end
       end
 
       def notify?

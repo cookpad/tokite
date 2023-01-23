@@ -163,7 +163,7 @@ RSpec.describe "Hook", type: :request do
 
     context "with requested_team rule" do
       let(:event) { "pull_request" }
-      let(:query) { %(requested_team:justice-league) }
+      let(:query) { %(requested_team:github/justice-league) }
 
       it "fire" do
         expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original

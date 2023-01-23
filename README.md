@@ -76,6 +76,6 @@ Tokite support only below events now.
 <tr><td>label:</td><td>Match pull_request or issue label.</td><td>label:Feature</td></tr>
 <tr><td>review_state:</td><td>Match pull_request_review state.</td><td>review_state:/commented|approved|changes_requested/</td></tr>
 <tr><td>requested_reviewer:</td><td>Match user name of review requested reviewer</td><td>requested_reviewer:hogelog</td></tr>
-<tr><td>requested_team:</td><td>Match team slug of review requested team</td><td>requested_team:chef</td></tr>
+<tr><td>requested_team:</td><td>Match team name of review requested team</td><td>requested_team:cookpad/chef</td></tr>
 <tr><td>unspecified</td><td>Match title or body field.</td><td>review please</td></tr>
 </table>
