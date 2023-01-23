@@ -13,6 +13,10 @@ development:
 
 test:
   <<: *default
+<% if ENV["GITHUB_ACTIONS"] %>
+  user: postgres
+  password: postgres_password
+<% end %>
   database: tokite_test
 
 production:
