@@ -159,6 +159,18 @@ RSpec.describe "Hook", type: :request do
         expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
         post hooks_path, params: params, headers: headers, as: :json
       end
+
+      context 'review_requested action' do
+        let(:params) {
+          JSON.parse(payload_json("#{event}.review_requested.json"))
+        }
+
+        it "fires a hook" do
+          expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
+          expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
+          post hooks_path, params: params, headers: headers, as: :json
+        end
+      end
     end
 
     context "with requested_team rule" do

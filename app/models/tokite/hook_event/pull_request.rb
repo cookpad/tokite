@@ -9,7 +9,7 @@ module Tokite
           body: hook_params[:pull_request][:body],
           user: hook_params[:pull_request][:user][:login],
           label: hook_params[:pull_request][:labels].map { |label| label[:name] },
-          requested_reviewer: hook_params[:pull_request][:requested_reviewers].map { |reviewer| reviewer[:login] },
+          requested_reviewer: hook_params[:requested_reviewer]&.[](:login) || hook_params[:pull_request][:requested_reviewers].map { |reviewer| reviewer[:login] },
           requested_team: hook_params[:pull_request][:requested_teams].map { |team| parse_team_name(team) },
         }
       end
