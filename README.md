@@ -35,8 +35,8 @@ $ ./bin/rails tokite:yarn:install
 
 ## Configuration
 <table>
-<tr><th>GITHUB_CLIENT_ID</th><td>Google+ OAuth2 client ID</td></tr>
-<tr><th>GITHUB_CLIENT_SECRET</th><td>Google+ OAuth2 client secret</td></tr>
+<tr><th>GITHUB_CLIENT_ID</th><td>GitHub OAuth2 client ID</td></tr>
+<tr><th>GITHUB_CLIENT_SECRET</th><td>GitHub OAuth2 client secret</td></tr>
 <tr><th>GITHUB_HOST (optional)</th><td>GitHub Enterprise host</td></tr>
 <tr><th>SECRET_KEY_BASE</th><td><code>rails secret</code> key</td></tr>
 <tr><th>SLACK_WEBHOOK_URL</th><td>Slack incoming webhook url</td></tr>
@@ -75,5 +75,7 @@ Tokite support only below events now.
 <tr><td>user:</td><td>Match user name.</td><td>user:hogelog</td></tr>
 <tr><td>label:</td><td>Match pull_request or issue label.</td><td>label:Feature</td></tr>
 <tr><td>review_state:</td><td>Match pull_request_review state.</td><td>review_state:/commented|approved|changes_requested/</td></tr>
+<tr><td>requested_reviewer:</td><td>Match user name of review requested reviewer</td><td>requested_reviewer:hogelog</td></tr>
+<tr><td>requested_team:</td><td>Match team name of review requested team</td><td>requested_team:cookpad/chef</td></tr>
 <tr><td>unspecified</td><td>Match title or body field.</td><td>review please</td></tr>
 </table>

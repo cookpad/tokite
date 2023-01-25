@@ -15,7 +15,7 @@ RSpec.describe "Hook", type: :request do
       let(:event) { "pull_request" }
       let(:query) { %(event:pull_request repo:hogelog/test-repo user:hogelog title:/./ body:/./ /./ -"unmatched word") }
 
-      it "fire hook" do
+      it "fires a hook" do
         expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
         expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
         post hooks_path, params: params, headers: headers, as: :json
@@ -27,7 +27,7 @@ RSpec.describe "Hook", type: :request do
           params["pull_request"].delete("body")
         end
 
-        it "fire hook" do
+        it "fires a hook" do
           expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
           expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
           post hooks_path, params: params, headers: headers, as: :json
@@ -39,7 +39,7 @@ RSpec.describe "Hook", type: :request do
       let(:event) { "issues" }
       let(:query) { %(event:issues repo:hogelog/test-repo user:hogelog title:/./ body:/./ /./ -"unmatched word") }
 
-      it "fire hook" do
+      it "fires a hook" do
         expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
         expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
         post hooks_path, params: params, headers: headers, as: :json
@@ -51,7 +51,7 @@ RSpec.describe "Hook", type: :request do
           params["issue"].delete("body")
         end
 
-        it "fire hook" do
+        it "fires a hook" do
           expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
           expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
           post hooks_path, params: params, headers: headers, as: :json
@@ -63,7 +63,7 @@ RSpec.describe "Hook", type: :request do
       let(:event) { "issue_comment" }
       let(:query) { %(event:issue_comment repo:hogelog/test-repo user:hogelog body:/./ /./ -"unmatched word") }
 
-      it "fire hook" do
+      it "fires a hook" do
         expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
         expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
         post hooks_path, params: params, headers: headers, as: :json
@@ -74,7 +74,7 @@ RSpec.describe "Hook", type: :request do
       let(:event) { "pull_request_review" }
       let(:query) { %(event:pull_request_review repo:hogelog/test-repo user:hogelog review_state:commented body:/./ /./ -"unmatched word") }
 
-      it "fire hook" do
+      it "fires a hook" do
         expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
         expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
         post hooks_path, params: params, headers: headers, as: :json
@@ -86,7 +86,7 @@ RSpec.describe "Hook", type: :request do
           params["review"].delete("body")
         end
 
-        it "fire hook" do
+        it "fires a hook" do
           expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
           expect_any_instance_of(Tokite::NotifyGithubHookEventJob).not_to receive(:perform)
           post hooks_path, params: params, headers: headers, as: :json
@@ -98,7 +98,7 @@ RSpec.describe "Hook", type: :request do
       let(:event) { "pull_request_review_comment" }
       let(:query) { %(event:pull_request_review_comment repo:hogelog/test-repo user:hogelog body:/./ /./ -"unmatched word") }
 
-      it "fire hook" do
+      it "fires a hook" do
         expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
         expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
         post hooks_path, params: params, headers: headers, as: :json
@@ -132,7 +132,7 @@ RSpec.describe "Hook", type: :request do
       let(:event) { "issues" }
       let(:query) { %(label:/bug|foobar/) }
 
-      it "fire hook" do
+      it "fires a hook" do
         expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
         expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
         post hooks_path, params: params, headers: headers, as: :json
@@ -146,6 +146,40 @@ RSpec.describe "Hook", type: :request do
       it "doesn't notify to slack" do
         expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
         expect_any_instance_of(Tokite::NotifyGithubHookEventJob).not_to receive(:perform)
+        post hooks_path, params: params, headers: headers, as: :json
+      end
+    end
+
+    context "with requested_reviewer rule" do
+      let(:event) { "pull_request" }
+      let(:query) { %(requested_reviewer:other_user) }
+
+      it "fires a hook" do
+        expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
+        expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
+        post hooks_path, params: params, headers: headers, as: :json
+      end
+
+      context 'review_requested action' do
+        let(:params) {
+          JSON.parse(payload_json("#{event}.review_requested.json"))
+        }
+
+        it "fires a hook" do
+          expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
+          expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
+          post hooks_path, params: params, headers: headers, as: :json
+        end
+      end
+    end
+
+    context "with requested_team rule" do
+      let(:event) { "pull_request" }
+      let(:query) { %(requested_team:github/justice-league) }
+
+      it "fires a hook" do
+        expect_any_instance_of(Tokite::Hook).to receive(:fire!).and_call_original
+        expect_any_instance_of(Tokite::NotifyGithubHookEventJob).to receive(:perform)
         post hooks_path, params: params, headers: headers, as: :json
       end
     end

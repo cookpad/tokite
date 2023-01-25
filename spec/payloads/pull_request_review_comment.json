@@ -89,6 +89,9 @@
     "requested_reviewers": [
 
     ],
+    "requested_teams": [
+
+    ],
     "milestone": null,
     "commits_url": "https://api.github.com/repos/hogelog/test-repo/pulls/6/commits",
     "review_comments_url": "https://api.github.com/repos/hogelog/test-repo/pulls/6/comments",
