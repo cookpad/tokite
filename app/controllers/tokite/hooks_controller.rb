@@ -6,7 +6,9 @@ module Tokite
 
     def create
       logger.debug("Hook triggered: #{github_event}")
-      Hook.fire!(github_event, request.request_parameters)
+      unless request.request_parameters["repository"]["private"]
+        Hook.fire!(github_event, request.request_parameters)
+      end
       render plain: "ok"
     end
 

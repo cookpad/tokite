@@ -1,13 +1,39 @@
-- if current_user_token
-  = link_to "Watch new repositories", new_repository_path, class: "button is-primary"
 
-.vspace-40
+- if ENV['GITHUB_APP_ID']
+  - if current_user_token
+    = link_to "Install tokite to your organizations or repositories", @installation_url, class: "button is-primary"
+  .vspace-40
 
-%h1.title Watching repositories
+  %h1.title Organizations watched by Tokite:
+  %table.table.is-bordered
+    - @orgs.each do |org|
+      %tr
+        %td
+          =link_to "#{org[:name]}", org[:url]
+          - if org[:admin_url]
+            %span.tag{style: "border-radius: 4px;"} admin
+          - if org[:limited]
+            %span.tag.is-warning{style: "background-color: #ffdd57; border-radius: 4px;"} limited installation
+          - if org[:admin_url]
+            %span.some{style: "float: right"}
+              =link_to "Setting", org[:admin_url], class: "button is-small"
 
-%table.table.is-bordered
-  - @repositories.each do |repo|
-    %tr
-      %td= link_to repo.name, repo.url
-      - if show_admin_menu?
-        %td= link_to "Unwatch", repo, method: :delete, class: "button is-danger", data: { confirm: "Unwatch repository?" }
+  .vspace-40
+  %h1.title Your repositories watched by Tokite:
+  %table.table.is-bordered
+    - @user_repos.each do |repo|
+      %tr
+        %td= link_to "#{repo[:name]}", repo[:url]
+
+- else
+  - if current_user_token
+    = link_to "Watch new repositories", new_repository_path, class: "button is-primary"
+  .vspace-40
+
+  %h1.title Watching repositories
+  %table.table.is-bordered
+    - @repositories.each do |repo|
+      %tr
+        %td= link_to repo.name, repo.url
+        - if show_admin_menu?
+          %td= link_to "Unwatch", repo, method: :delete, class: "button is-danger", data: { confirm: "Unwatch repository?" }

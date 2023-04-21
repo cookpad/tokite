@@ -21,8 +21,32 @@ module Tokite
       redirect_to sign_in_path
     end
 
-    def octokit_client
-      @octokit_client ||= Octokit::Client.new(access_token: current_user_token, auto_paginate: true)
+    def octokit_user_client
+      @octokit_user_client ||= Octokit::Client.new(access_token: current_user_token, auto_paginate: true)
+    end
+
+    def octokit_app_client
+      if !@octokit_app_client && ENV['GITHUB_APP_ID']
+        private_pem = File.read(ENV['GITHUB_APP_PEM_PATH'])
+        private_key = OpenSSL::PKey::RSA.new(private_pem)
+        payload = {
+          iat: Time.now.to_i,
+          exp: Time.now.to_i + (5 * 60),
+          iss: ENV['GITHUB_APP_ID']   # GitHub App's identifier
+        }
+        jwt = JWT.encode(payload, private_key, "RS256")
+        @octokit_app_client = Octokit::Client.new(bearer_token: jwt)
+      else
+        @octokit_app_client
+      end
+    end
+
+    def octokit_app_installations
+      @octokit_app_installations ||= octokit_app_client.find_app_installations
+    end
+
+    def octokit_user_nickname
+      @octokit_user_nickname ||= octokit_user_client.user.login
     end
   end
 end
