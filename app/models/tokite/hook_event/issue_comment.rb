@@ -7,17 +7,18 @@ module Tokite
           repo: hook_params[:repository][:full_name],
           body: hook_params[:comment][:body],
           user: hook_params[:comment][:user][:login],
+          label: hook_params[:issue][:labels].map { |label| label[:name] },
         }
       end
-  
+
       def notify?
         %w(created).include?(hook_params[:action])
       end
-  
+
       def slack_text
         "[#{hook_params[:repository][:full_name]}] New comment by #{hook_params[:comment][:user][:login]} on issue <#{hook_params[:comment][:html_url]}|##{hook_params[:issue][:number]}: #{hook_params[:issue][:title]}>"
       end
-  
+
       def slack_attachment
         {
           fallback: hook_params[:comment][:body],
