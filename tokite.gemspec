@@ -16,9 +16,9 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib,schema}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  s.add_dependency "rails", "~> 5.1.1"
+  s.add_dependency "rails", ["~> 5.2", ">= 5.2.8.1"]
   s.add_dependency "pg"
-  s.add_dependency 'sass-rails', '~> 5.0'
+  s.add_dependency 'sass-rails', '~> 5.1'
   s.add_dependency "haml"
   s.add_dependency "haml-rails"
   s.add_dependency "omniauth-github"
