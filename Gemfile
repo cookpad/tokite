@@ -10,3 +10,4 @@ gem 'net-http' # For https://github.com/lostisland/faraday-net_http/issues/7#iss
 gem 'pry-byebug'
 gem 'pry-rails'
 gem 'rspec_junit_formatter'
+gem 'zeitwerk'
