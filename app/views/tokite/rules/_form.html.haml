@@ -11,7 +11,7 @@
       .column.is-2= link_to "Transfer", new_rule_transfers_path(@rule), class: "button is-primary"
       .column.is-2= link_to "Delete", rule_path(@rule), method: :delete, data: { confirm: %(Delete "#{@rule.name}"?) }, class: "button is-danger"
 
-.message.vspace-40
+.message.my-6
   .message-header
     Query description
   .message-body

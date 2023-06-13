@@ -1,11 +1,11 @@
 - if current_user_token
   = link_to "Watch new repositories", new_repository_path, class: "button is-primary"
 
-.vspace-40
+.my-6
 
 %h1.title Watching repositories
 
-%table.table.is-bordered
+%table.table.is-bordered.is-hoverable
   - @repositories.each do |repo|
     %tr
       %td= link_to repo.name, repo.url
