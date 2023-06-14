@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.0] - 2023-06-14
+
+- **BREAKING**: Upgrade to Rails 6.1 (https://github.com/cookpad/tokite/pull/64).
+
 ## [0.6.0] - 2023-06-14
 
 - **BREAKING**: Upgrade to Rails 6.0 (https://github.com/cookpad/tokite/pull/61).
@@ -46,7 +50,8 @@ We have not released a new version of tokite gem for a long time. Be careful whe
 - Fix an error occurred when a query contains wrong regular expressions (https://github.com/cookpad/tokite/pull/43).
 
 
-[Unreleased]: https://github.com/cookpad/tokite/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/cookpad/tokite/compare/v0.7.0...HEAD
+[0.7.0]: https://github.com/cookpad/tokite/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/cookpad/tokite/compare/v0.5.1...v0.6.0
 [0.5.1]: https://github.com/cookpad/tokite/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/cookpad/tokite/compare/v0.4.1...v0.5.0
