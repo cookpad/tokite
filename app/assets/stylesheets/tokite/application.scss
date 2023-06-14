@@ -1,6 +1,6 @@
 @import "bulma/sass/utilities/initial-variables";
 
-// Bootstrap like colors
+// Bootstrap-like colors
 $white:  #fff;
 $black:  #000;
 $red:    #d9534f;
@@ -21,7 +21,3 @@ $dark: $grey-darker;
 $text: $grey-dark;
 
 @import "bulma/bulma";
-
-.vspace-40 {
-  margin: 40px 0;
-}
