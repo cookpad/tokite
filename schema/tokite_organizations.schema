@@ -1,0 +1,6 @@
+create_table "tokite_organizations", force: :cascade do |t|
+  t.string   "name",       limit: 200, null: false
+  t.string   "url",        limit: 200, null: false
+end
+
+add_index "tokite_organizations", ["name"], name: "tokite_organizations_uniq_name", unique: true, using: :btree

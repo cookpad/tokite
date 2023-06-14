@@ -1,0 +1,33 @@
+- if !@orgs.present? && !@repositories.present?
+  No importable repositories.
+- else
+  = form_tag watchings_path do |f|
+    - if @orgs.present?
+      %h1.title Organizations
+      %ul
+        - @orgs.each do |org|
+          %li.field
+            .control
+              %label.checkbox
+                = check_box_tag "org_names[]", org.name, false, id: "names_#{sanitize_to_id(org.name)}", multiple: true
+                = org.name
+                = link_to "@", org.url
+      .vspace-40
+
+    - if @repositories.present?
+      %h1.title Repositories
+      %ul
+        - @repositories.each do |repo|
+          %li.field
+            .control
+              %label.checkbox
+                = check_box_tag "repo_names[]", repo.name, false, id: "names_#{sanitize_to_id(repo.name)}", multiple: true
+                = repo.name
+                - if repo.private?
+                  %span.tag.is-danger{style: "height: 1.5em"} private
+                = link_to "@", repo.url
+      .vspace-40
+
+    .field
+      .control
+        = submit_tag "Import organizations / repositories", class: "button is-primary"

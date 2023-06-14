@@ -8,7 +8,7 @@ Tokite::Engine.routes.draw do
     end
   end
   resources :rules, only: %w(index)
-  resources :repositories, only: %w(index new create destroy)
+  resources :watchings, only: %w(index new create destroy)
 
   get "sign_in", to: "sessions#new", as: "sign_in"
   get "auth/github/callback", to: "sessions#create"

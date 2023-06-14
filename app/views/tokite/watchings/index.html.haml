@@ -1,0 +1,22 @@
+- if current_user_token
+  = link_to "Watch new organizations / repositories", new_watching_path, class: "button is-primary"
+
+.vspace-40
+
+%h1.title Watching organizations
+%table.table.is-bordered
+  - @orgs.each do |org|
+    %tr
+      %td= link_to org.name, org.url
+      - if show_admin_menu?
+        %td= link_to "Unwatch", watching_path(org.id, type: :org), method: :delete, class: "button is-danger", data: { confirm: "Unwatch repository?" }
+
+.vspace-40
+
+%h1.title Watching repositories
+%table.table.is-bordered
+  - @repositories.each do |repo|
+    %tr
+      %td= link_to repo.name, repo.url
+      - if show_admin_menu?
+        %td= link_to "Unwatch", watching_path(repo.id, type: :repo), method: :delete, class: "button is-danger", data: { confirm: "Unwatch repository?" }
