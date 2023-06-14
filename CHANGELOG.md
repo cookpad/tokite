@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.1] - 2023-06-14
+
+### Changed
+
+- Upgrade bulma to 0.9.4 (https://github.com/cookpad/tokite/pull/59).
+
 ## [0.5.0] - 2023-06-14
 
 We have not released a new version of tokite gem for a long time. Be careful when upgrading to this version from previous versions.
@@ -36,5 +42,6 @@ We have not released a new version of tokite gem for a long time. Be careful whe
 - Fix an error occurred when a query contains wrong regular expressions (https://github.com/cookpad/tokite/pull/43).
 
 
-[Unreleased]: https://github.com/cookpad/tokite/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/cookpad/tokite/compare/v0.5.1...HEAD
+[0.5.1]: https://github.com/cookpad/tokite/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/cookpad/tokite/compare/v0.4.1...v0.5.0
