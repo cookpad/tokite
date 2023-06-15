@@ -7,11 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.1] - 2023-06-15
+
+### Changed
+
+- Upgrade omniauth-github to v2 (https://github.com/cookpad/tokite/pull/66).
+    - Please add omniauth-rails_csrf_protection gem to your Gemfile.
+- Use Ruby 3.1 for testing (https://github.com/cookpad/tokite/pull/67).
+
 ## [0.7.0] - 2023-06-14
+
+### Changed
 
 - **BREAKING**: Upgrade to Rails 6.1 (https://github.com/cookpad/tokite/pull/64).
 
 ## [0.6.0] - 2023-06-14
+
+### Changed
 
 - **BREAKING**: Upgrade to Rails 6.0 (https://github.com/cookpad/tokite/pull/61).
 
@@ -36,10 +48,10 @@ We have not released a new version of tokite gem for a long time. Be careful whe
 
 ### Changed
 
-- **BREAKING**: Use Ruby 2.7 (https://github.com/cookpad/tokite/pull/52).
 - **BREAKING**: Upgrade to Rails 5.2 (https://github.com/cookpad/tokite/pull/57).
 - Loose length limit of icon_emoji (https://github.com/cookpad/tokite/pull/46).
 - Upgrade rspec version for development (https://github.com/cookpad/tokite/pull/47).
+- Use Ruby 2.7 (https://github.com/cookpad/tokite/pull/52).
 - Use GitHub Actions for CI (https://github.com/cookpad/tokite/pull/54).
 
 ### Fixed
@@ -50,7 +62,8 @@ We have not released a new version of tokite gem for a long time. Be careful whe
 - Fix an error occurred when a query contains wrong regular expressions (https://github.com/cookpad/tokite/pull/43).
 
 
-[Unreleased]: https://github.com/cookpad/tokite/compare/v0.7.0...HEAD
+[Unreleased]: https://github.com/cookpad/tokite/compare/v0.7.1...HEAD
+[0.7.1]: https://github.com/cookpad/tokite/compare/v0.7.0...v0.7.1
 [0.7.0]: https://github.com/cookpad/tokite/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/cookpad/tokite/compare/v0.5.1...v0.6.0
 [0.5.1]: https://github.com/cookpad/tokite/compare/v0.5.0...v0.5.1
