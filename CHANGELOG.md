@@ -9,9 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.7.0] - 2023-06-14
 
+### Changed
+
 - **BREAKING**: Upgrade to Rails 6.1 (https://github.com/cookpad/tokite/pull/64).
 
 ## [0.6.0] - 2023-06-14
+
+### Changed
 
 - **BREAKING**: Upgrade to Rails 6.0 (https://github.com/cookpad/tokite/pull/61).
 
