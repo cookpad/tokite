@@ -1,1 +1,2 @@
-= link_to "Login with GitHub", "/auth/github"
+= form_with url: "/auth/github", method: :post do |form|
+  = form.submit "Login with GitHub", class: "button"
