@@ -36,10 +36,10 @@ We have not released a new version of tokite gem for a long time. Be careful whe
 
 ### Changed
 
-- **BREAKING**: Use Ruby 2.7 (https://github.com/cookpad/tokite/pull/52).
 - **BREAKING**: Upgrade to Rails 5.2 (https://github.com/cookpad/tokite/pull/57).
 - Loose length limit of icon_emoji (https://github.com/cookpad/tokite/pull/46).
 - Upgrade rspec version for development (https://github.com/cookpad/tokite/pull/47).
+- Use Ruby 2.7 (https://github.com/cookpad/tokite/pull/52).
 - Use GitHub Actions for CI (https://github.com/cookpad/tokite/pull/54).
 
 ### Fixed
