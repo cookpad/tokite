@@ -21,7 +21,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'sass-rails', '~> 6.0'
   s.add_dependency "haml"
   s.add_dependency "haml-rails"
-  s.add_dependency "omniauth-github"
+  s.add_dependency "omniauth-github", ">= 2.0.0"
+  s.add_dependency "omniauth-rails_csrf_protection"
   s.add_dependency "octokit"
   s.add_dependency "slack-notifier"
   s.add_dependency "ridgepole"
