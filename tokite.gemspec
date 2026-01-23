@@ -18,21 +18,19 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 6.1.0"
   s.add_dependency "pg"
-  s.add_dependency 'sass-rails', '~> 6.0'
-  s.add_dependency "haml"
+
   s.add_dependency "haml-rails"
+  s.add_dependency "haml"
+  s.add_dependency "octokit"
   s.add_dependency "omniauth-github", ">= 2.0.0"
   s.add_dependency "omniauth-rails_csrf_protection"
-  s.add_dependency "octokit"
-  s.add_dependency "slack-notifier"
-  s.add_dependency "ridgepole"
   s.add_dependency "parslet"
+  s.add_dependency "ridgepole"
+  s.add_dependency "sass-rails", "~> 6.0"
+  s.add_dependency "slack-notifier"
 
   # Workaround before Rails 7.1
   # https://github.com/rails/rails/issues/54260
   # https://github.com/ruby-concurrency/concurrent-ruby/commit/d7ce956dacd0b772273d39b8ed31a30cff7ecf38
   s.add_dependency "concurrent-ruby", "<= 1.3.4"
-
-  s.add_development_dependency "rspec-rails", '>= 3.9.0'
-  s.add_development_dependency "factory_bot_rails"
 end
