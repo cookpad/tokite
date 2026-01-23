@@ -6,6 +6,10 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'factory_bot_rails'
 
+# As we use a Rails app in spec/dummy, we need to tell the location of factories
+FactoryBot.definition_file_paths = [File.expand_path('../factories', __FILE__)]
+FactoryBot.find_definitions
+
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 RSpec.configure do |config|
