@@ -28,6 +28,11 @@ Gem::Specification.new do |s|
   s.add_dependency "ridgepole"
   s.add_dependency "parslet"
 
+  # Workaround before Rails 7.1
+  # https://github.com/rails/rails/issues/54260
+  # https://github.com/ruby-concurrency/concurrent-ruby/commit/d7ce956dacd0b772273d39b8ed31a30cff7ecf38
+  s.add_dependency "concurrent-ruby", "<= 1.3.4"
+
   s.add_development_dependency "rspec-rails", '>= 3.9.0'
   s.add_development_dependency "factory_bot_rails"
 end
