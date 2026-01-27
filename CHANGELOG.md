@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- **BREAKING**: Change Rails asset pipeline from Sprockets to Propshaft + dartsass-rails. Please follow the official migration guide from Propshaft. You may need to run `bin/rails dartsass:install`. Tokite's assets should be built when running `bin/rails assets:precompile` on your application.
+
 ## [0.8.1] - 2026-01-27
 
 - fix: Use button_to for DELETE requests

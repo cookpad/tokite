@@ -14,20 +14,20 @@ Gem::Specification.new do |s|
   s.description = "Customizable Slack notification from GitHub"
   s.license     = "MIT"
 
-  s.files = Dir["{app,config,db,lib,schema}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  s.files = Dir["{app,config,db,lib,schema,vendor}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
   s.add_dependency "rails", "~> 7.0.0"
   s.add_dependency "pg"
 
+  s.add_dependency "dartsass-rails"
   s.add_dependency "haml-rails"
   s.add_dependency "haml"
   s.add_dependency "octokit"
   s.add_dependency "omniauth-github", ">= 2.0.0"
   s.add_dependency "omniauth-rails_csrf_protection"
   s.add_dependency "parslet"
+  s.add_dependency "propshaft"
   s.add_dependency "ridgepole"
-  s.add_dependency "sass-rails", "~> 6.0"
-  s.add_dependency "sprockets-rails"
   s.add_dependency "slack-notifier"
 
   # Workaround before Rails 7.1

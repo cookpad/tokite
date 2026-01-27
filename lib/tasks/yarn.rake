@@ -1,3 +1,0 @@
-namespace :tokite do
-
-end

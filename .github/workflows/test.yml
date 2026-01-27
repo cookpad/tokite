@@ -22,13 +22,16 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+    env:
+      RAILS_ENV: test
     steps:
     - uses: actions/checkout@v6
     - uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true
-    - name: Setup DB
+    - name: Setup
       run: |
-        RAILS_ENV=test bundle exec rails app:tokite:ridgepole:install app:tokite:ridgepole:apply
+        bundle exec rails app:tokite:ridgepole:install app:tokite:ridgepole:apply
+        bin/rails app:assets:precompile
     - name: Run tests
       run: bundle exec rspec --profile 10

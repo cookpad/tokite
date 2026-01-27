@@ -1,8 +1,11 @@
 .bundle/
 log/*.log
-pkg/
+spec/dummy/app/assets/builds/*
+!spec/dummy/app/assets/builds/.keep
 spec/dummy/log/
+spec/dummy/public/assets
 spec/dummy/tmp/
 spec/dummy/.env
-node_modules/
 Gemfile.lock
+tmp/*
+!tmp/.keep

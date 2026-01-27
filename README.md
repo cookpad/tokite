@@ -28,9 +28,9 @@ $ ./bin/rails app:tokite:ridgepole:apply
 $ RAILS_ENV=test ./bin/rails app:tokite:ridgepole:apply
 ```
 
-### Setup yarn pkg
+### Download CSS files
 ```console
-$ ./bin/rails tokite:yarn:install
+$ ./bin/rails app:tokite:stylesheet:install
 ```
 
 ## Configuration
