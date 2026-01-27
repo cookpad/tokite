@@ -1,5 +1,6 @@
 .bundle/
 log/*.log
+pkg/
 spec/dummy/app/assets/builds/*
 !spec/dummy/app/assets/builds/.keep
 spec/dummy/log/
