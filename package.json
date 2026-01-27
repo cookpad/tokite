@@ -1,7 +1,0 @@
-{
-  "name": "tokite",
-  "private": true,
-  "dependencies": {
-    "bulma": "^0.9.4"
-  }
-}
