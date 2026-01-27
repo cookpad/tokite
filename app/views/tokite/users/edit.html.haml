@@ -2,4 +2,4 @@
 = render "form"
 
 - if @user.group_user?
-  = link_to "Delete user", user_path(@user), method: :delete, data: { confirm: %(Delete "#{@user.name}"?) }
+  = button_to "Delete user", user_path(@user), method: :delete, data: { confirm: %(Delete "#{@user.name}"?) }
