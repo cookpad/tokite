@@ -9,18 +9,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.9.0] - 2026-01-27
 
+### Changed
+
 - **BREAKING**: Change Rails asset pipeline from Sprockets to Propshaft + dartsass-rails. Please follow the official migration guide from Propshaft. You may need to run `bin/rails dartsass:install`. Tokite's assets should be built when running `bin/rails assets:precompile` on your application.
 
 ## [0.8.1] - 2026-01-27
+
+### Fixed
 
 - fix: Use button_to for DELETE requests
 
 ## [0.8.0] - 2026-01-24
 
+### Changed
+
 - **BREAKING**: Upgrade Rails to 7.0
-- fix: Limit version of concurrent-ruby
 - Upgrade GitHub Actions workflow version for CI
 - Unify development dependencies in gemspec and Gemfile
+
+### Fixed
+
+- fix: Limit version of concurrent-ruby
+
+### Removed
+
 - Remove pry, byebug, and rspec_junit_formatter from development dependencies
 
 ## [0.7.1] - 2023-06-15
