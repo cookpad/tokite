@@ -79,3 +79,6 @@ Tokite support only below events now.
 <tr><td>requested_team:</td><td>Match team name of review requested team</td><td>requested_team:cookpad/chef</td></tr>
 <tr><td>unspecified</td><td>Match title or body field.</td><td>review please</td></tr>
 </table>
+
+## Maintenance
+To release a new version of the tokite gem, please write CHANGELOG.md, update the version string in lib/tokite/version.rb, and send a pull request for the changes. After merging the pull request, manually approve the run of push_gem.yml at https://github.com/cookpad/tokite/actions/workflows/push_gem.yml to release the new version to RubyGems.org.
