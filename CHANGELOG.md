@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-01-28
+
+### Changed
+
+- **BREAKING**: Upgrade Rails to 7.1
+
+### Removed
+
+- Remove Tokite::ApplicationMailer and layouts
+
 ## [1.0.0] - 2026-01-28
 
 This is the first major release version. There are no breaking changes between v0.9.0 and v1.0.0.
