@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib,schema,vendor}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  s.add_dependency "rails", "~> 7.0.0"
+  s.add_dependency "rails", "~> 7.1.0"
   s.add_dependency "pg"
 
   s.add_dependency "dartsass-rails"
@@ -29,9 +29,4 @@ Gem::Specification.new do |s|
   s.add_dependency "propshaft"
   s.add_dependency "ridgepole"
   s.add_dependency "slack-notifier"
-
-  # Workaround before Rails 7.1
-  # https://github.com/rails/rails/issues/54260
-  # https://github.com/ruby-concurrency/concurrent-ruby/commit/d7ce956dacd0b772273d39b8ed31a30cff7ecf38
-  s.add_dependency "concurrent-ruby", "<= 1.3.4"
 end
