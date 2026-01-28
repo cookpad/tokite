@@ -1,3 +1,5 @@
 module Tokite
   VERSION = '1.0.0.rc1'
 end
+
+# This is a comment for CI pipeline experiments
