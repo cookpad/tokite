@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib,schema,vendor}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  s.add_dependency "rails", "~> 8.0.0"
+  s.add_dependency "rails", "~> 8.1.0"
   s.add_dependency "pg"
 
   s.add_dependency "dartsass-rails"
